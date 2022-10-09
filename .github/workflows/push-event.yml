@@ -1,0 +1,26 @@
+name: Commit Event
+
+env:
+  commit-msg: ${{ github.event.head_commit.message }}
+
+on:
+  push:
+    branches: ['master']
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: echo ${{env.commit-msg}}
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.AUTOMERGE }}
+          repository: PragmaticEngineering/svelte-form-builder-pro
+          event-type: test-free-push
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "msg": "${{env.commit-msg}}"}'
