@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Field } from '$lib/Utils/types';
+	import type { ComponentOptions, Field } from '$lib/Utils/types';
 	import { convertDataAttributes, CScope } from '$lib/Utils/Utils';
 	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
 	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
