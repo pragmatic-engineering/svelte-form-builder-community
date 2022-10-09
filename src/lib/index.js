@@ -1,4 +1,4 @@
-// Reexport your entry components here
+// Re-export your entry components here
 import FormBuilder from './FormBuilder.svelte';
 import { DefinitionManager } from './lib/DefinitionManager';
 import { convertDataAttributes } from './Utils/Utils';
