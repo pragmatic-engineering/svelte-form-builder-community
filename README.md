@@ -1,38 +1,64 @@
-# create-svelte
+# Svelte Form Builder
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Svelte Form Builder is a No-Code/Low-Code Drag and Drop Form Builder Library built for Svelte JS.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Create, Edit, Preview Forms
+- Export/Import Form Definitions
+- Custom Validations
+- Custom Attributes
+- Themes & Custom Styling
+- Responsive Forms
+- Super easy to extend and plugin your own components
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Solutions to fit any need
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- Electronic Healthcare
+- Field Operations
+- Payments
+- Quizzes
+- Registrations
+- Surveys
+- Workflow
 
-## Developing
+## Pre-Built Components
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### 28 Standard Components
 
-```bash
-npm run dev
+- Audio
+- Button
+- Canvas
+- Checkbox Group
+- Color
+- Date
+- DateTime
+- Divider
+- File Upload
+- Header
+- Hidden
+- Link
+- Meter
+- Month
+- Number
+- Paragraph
+- Password
+- Picture
+- Progress
+- Radio Group
+- Range
+- Select
+- Star
+- Text
+- Text Area
+- Time
+- Video
+- Week
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### 5 Premium Components
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- AutoComplete
+- Matrix
+- Rich Text
+- Signature Pad
+- Table
