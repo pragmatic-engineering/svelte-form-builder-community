@@ -103,7 +103,7 @@
 			allComponentList = [...allComponentList, { componentName: componentName, ...metaData }];
 		}
 
-		//Add the user defined components
+		//User defined components or overrides
 		for (const item of $opts.theComponentImports.filter(
 			(x) => x.importPath && !allComponentList.some((y) => y.componentName == x.componentName)
 		)) {
