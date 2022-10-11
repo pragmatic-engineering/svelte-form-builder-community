@@ -22,5 +22,5 @@ jobs:
         with:
           token: ${{ secrets.AUTOMERGE }}
           repository: PragmaticEngineering/svelte-form-builder-pro
-          event-type: standard-push
+          event-type: community-push
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "msg": "${{env.commit-msg}}"}'

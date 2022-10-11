@@ -1,1 +1,1 @@
-export const flavor = 'standard';
+export const flavor = 'community';

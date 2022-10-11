@@ -123,7 +123,7 @@
 
 		//If using standard, make sure the sponsored components don't show up (there won't be a matching file to import)
 		//This will allow the component name to be used if user is implementing a custom component with the same name
-		if (flavor == 'standard') {
+		if (flavor == 'community') {
 			components = components.filter((x) => !SponsoredComponents.includes(x));
 		}
 

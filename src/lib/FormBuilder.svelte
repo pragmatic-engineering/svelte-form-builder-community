@@ -22,8 +22,8 @@
 	import Loader from '$lib/Utils/MiscComponents/Loader.svelte';
 	import { RenderManager } from '$lib/lib/RenderManager';
 	import { CScope } from '$lib/Utils/Utils';
-	import '/node_modules/balloon-css/balloon.min.css';
-	import '/node_modules/pretty-checkbox/dist/pretty-checkbox.min.css';
+	import 'balloon-css/balloon.min.css';
+	import 'pretty-checkbox/dist/pretty-checkbox.min.css';
 	import { RenderAPI } from '$lib/lib/API/RenderAPI';
 	import DisplayContentsWrapper from '$lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
 	import Form from '$lib/Views/Form.svelte';

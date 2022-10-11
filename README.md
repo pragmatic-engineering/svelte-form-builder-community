@@ -22,9 +22,9 @@ Svelte Form Builder is a No-Code/Low-Code Drag and Drop Form Builder Library bui
 - Surveys
 - Workflow
 
-## Pre-Built Components
+## Components
 
-### 28 Standard Components
+### 28 Community Components
 
 - Audio
 - Button
