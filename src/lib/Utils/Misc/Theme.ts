@@ -25,7 +25,8 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 			borderRadius: '5px',
 			height: '16px',
 			margin: '10px'
-		}
+		},
+		componentSelectionStyle: { maxHeight: '50vh' }
 	},
 	Light: {
 		primaryBackground:
@@ -48,6 +49,7 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 			borderRadius: '5px',
 			height: '16px',
 			margin: '10px'
-		}
+		},
+		componentSelectionStyle: { maxHeight: '50vh' }
 	}
 };

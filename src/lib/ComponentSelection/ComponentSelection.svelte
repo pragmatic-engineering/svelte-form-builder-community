@@ -243,7 +243,12 @@
 	let specialCategories = ['starred', 'Common'];
 </script>
 
-<div class="main" bind:this={main} style:border={isMinimized ? '2px solid red' : '2px solid black'}>
+<div
+	class="main"
+	bind:this={main}
+	style:border={isMinimized ? '2px solid red' : '2px solid black'}
+	style:max-height={$opts.styling?.componentSelectionStyle?.maxHeight}
+>
 	<div class="header-controls">
 		{#if !isShrunk}
 			<select
@@ -453,8 +458,6 @@
 		border: 1px solid black;
 		z-index: 9;
 		background-color: white;
-		max-height: 80vh;
-		/* height: 80vh; */
 		overflow-y: scroll;
 	}
 

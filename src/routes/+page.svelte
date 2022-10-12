@@ -250,7 +250,8 @@
 				borderRadius: '5px',
 				height: '16px',
 				margin: '10px'
-			}
+			},
+			componentSelectionStyle: { maxHeight: '40vh' }
 		},
 		builderAPIEvents: {
 			onComponentAdded: (field: Field) => {

@@ -214,6 +214,7 @@ export interface StyleConfig {
 	dragNDropHoverBackgroundColor?: string;
 	dragNDropLeftRightStyle?: Partial<CSSStyleDeclaration>;
 	dragNDropTopBottomStyle?: Partial<CSSStyleDeclaration>;
+	componentSelectionStyle?: Partial<CSSStyleDeclaration>;
 }
 
 interface CustomToolButton {
