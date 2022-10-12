@@ -41,9 +41,9 @@
 		<div title="Copy">
 			<Icon
 				type="Copy"
-				on:click={() => {
-					DefinitionManager.copyField(tab.id, field);
-					animateScroll.scrollToBottom();
+				on:click={async () => {
+					const newField = await DefinitionManager.copyField(tab.id, field);
+					animateScroll.scrollTo({ element: `#${newField.htmlAttributes.id}` });
 				}}
 				enableAlternate
 				bind:fill

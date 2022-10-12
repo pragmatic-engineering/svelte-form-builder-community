@@ -196,7 +196,7 @@ export class DefinitionManager {
 		copiedField.htmlAttributes.id = undefined;
 		copiedField.htmlAttributes.name = undefined;
 
-		DefinitionManager.addFieldToTab(tabID, copiedField);
+		return DefinitionManager.addFieldToTab(tabID, copiedField);
 	}
 
 	public static async addFieldToTab(
@@ -245,6 +245,8 @@ export class DefinitionManager {
 	}
 
 	public static async addFieldGroupToTab(tabID: string, fieldGroup: FieldGroup[]) {
+		const fields: Field[] = [];
+
 		if (fieldGroup) {
 			for (const group of fieldGroup) {
 				let firstFieldInfo: FieldInfo | undefined;
@@ -252,14 +254,19 @@ export class DefinitionManager {
 				for (const [i, field] of group.fields.entries()) {
 					const fieldToAdd = merge({}, field);
 					if (i == 0) {
+						//First field from the group will give back tab/row data for the subsequent fields
 						const addedField = await this.addFieldToTab(tabID, fieldToAdd);
 						firstFieldInfo = this.getFieldInfo(addedField.htmlAttributes.id as string);
+						fields.push(addedField);
 					} else {
-						await this.addFieldToTab(tabID, fieldToAdd, firstFieldInfo?.row, i);
+						const addedField = await this.addFieldToTab(tabID, fieldToAdd, firstFieldInfo?.row, i);
+						fields.push(addedField);
 					}
 				}
 			}
 		}
+
+		return fields;
 	}
 
 	public static deleteField(tabID: string, field: Field, confirmDelete = false) {

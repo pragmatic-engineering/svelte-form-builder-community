@@ -31,10 +31,11 @@
 
 	async function insertComponent(componentOptions: ComponentOptions) {
 		if (componentOptions.fieldGroup) {
-			DefinitionManager.addFieldGroupToTab(
+			const fields = await DefinitionManager.addFieldGroupToTab(
 				TabManager.getActiveTabDefinition().tab?.id as string,
 				componentOptions.fieldGroup
 			);
+			animateScroll.scrollTo({ element: `#${fields[0].htmlAttributes.id}` });
 		} else {
 			const field = await DefinitionManager.addFieldToTab(
 				TabManager.getActiveTabDefinition().tab?.id as string,
@@ -43,8 +44,8 @@
 			if ($opts.editOnAdd) {
 				QuickMenuUtils.editField(field);
 			}
+			animateScroll.scrollTo({ element: `#${field.htmlAttributes.id}` });
 		}
-		animateScroll.scrollToBottom();
 	}
 
 	//Get list of all categories
