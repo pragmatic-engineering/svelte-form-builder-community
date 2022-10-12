@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { DefinitionManager } from '$lib/lib/DefinitionManager';
 	import type { Field, FormTab, ComponentOptions } from '$lib/Utils/types';
-	import { animateScroll } from 'svelte-scrollto-element';
 	import { opts } from '$lib/Utils/store';
 	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
 	import { QuickMenuUtils } from '$lib/Form/QuickMenu/QuickMenuUtils';
+	import { scrollTo } from '$lib/Utils/Utils';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
@@ -43,7 +43,7 @@
 				type="Copy"
 				on:click={async () => {
 					const newField = await DefinitionManager.copyField(tab.id, field);
-					animateScroll.scrollTo({ element: `#${newField.htmlAttributes.id}` });
+					scrollTo(newField);
 				}}
 				enableAlternate
 				bind:fill

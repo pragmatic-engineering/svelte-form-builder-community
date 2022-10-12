@@ -4,6 +4,7 @@
 
 	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 	import { view } from '$lib/Utils/store';
+	import { convertDataAttributes } from '$lib/Utils/Utils';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
@@ -15,6 +16,8 @@
 
 	{#if $view == 'build'}
 		<div
+			{...field.htmlAttributes}
+			{...convertDataAttributes(field.dataAttributes)}
 			class:edit={true}
 			class:border={true}
 			contenteditable="true"
@@ -23,7 +26,12 @@
 			on:pointerenter
 		/>
 	{:else}
-		<div contenteditable="false" bind:innerHTML={field.htmlAttributes.value} />
+		<div
+			{...field.htmlAttributes}
+			{...convertDataAttributes(field.dataAttributes)}
+			contenteditable="false"
+			bind:innerHTML={field.htmlAttributes.value}
+		/>
 	{/if}
 </GroupSlot>
 

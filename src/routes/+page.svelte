@@ -25,7 +25,7 @@
 					rowID: 1,
 					fields: [
 						{
-							componentName: 'RichText',
+							componentName: 'Text',
 							htmlAttributes: {}
 							// dataAttributes: [
 							// 	{
@@ -595,3 +595,5 @@
 </script>
 
 <FormBuilder {options} />
+
+<div style="height:2000px" />

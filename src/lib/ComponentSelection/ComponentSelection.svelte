@@ -8,7 +8,6 @@
 		type Field,
 		type FormComponentsType
 	} from '$lib/Utils/types';
-	import { animateScroll } from 'svelte-scrollto-element';
 	import { onMount } from 'svelte';
 	import { DragNDrop } from '$lib/Form/DragNDrop/DragNDrop';
 	import { TabManager } from '$lib/Tabs/TabManager';
@@ -20,6 +19,7 @@
 	import { blur, fade, fly, scale, slide } from 'svelte/transition';
 	import DropdownMenu from '$lib/Utils/MiscComponents/DropdownMenu.svelte';
 	import { flavor } from '$lib/Utils/Misc/flavor';
+	import { scrollTo } from '$lib/Utils/Utils';
 
 	let main: HTMLDivElement = {} as HTMLDivElement;
 	let dragHandle: HTMLDivElement = {} as HTMLDivElement;
@@ -35,7 +35,7 @@
 				TabManager.getActiveTabDefinition().tab?.id as string,
 				componentOptions.fieldGroup
 			);
-			animateScroll.scrollTo({ element: `#${fields[0].htmlAttributes.id}` });
+			scrollTo(fields[0]);
 		} else {
 			const field = await DefinitionManager.addFieldToTab(
 				TabManager.getActiveTabDefinition().tab?.id as string,
@@ -44,7 +44,7 @@
 			if ($opts.editOnAdd) {
 				QuickMenuUtils.editField(field);
 			}
-			animateScroll.scrollTo({ element: `#${field.htmlAttributes.id}` });
+			scrollTo(field);
 		}
 	}
 

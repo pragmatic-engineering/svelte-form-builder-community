@@ -1,4 +1,5 @@
-import type { CustomDataAttribute } from '$lib/Utils/types';
+import type { CustomDataAttribute, Field } from '$lib/Utils/types';
+import { animateScroll } from 'svelte-scrollto-element';
 
 export function capitalizeFirstLetter(string: string) {
 	return string[0].toUpperCase() + string.slice(1);
@@ -33,6 +34,26 @@ export function convertDataAttributes(attributes: CustomDataAttribute[] | undefi
 	});
 
 	return results;
+}
+
+//Scroll to element and offset by half the viewport height
+export function scrollTo(field: Field) {
+	const offset = (-1 * window.innerHeight) / 2;
+	const id = field.htmlAttributes.id;
+	const standardElement = document.getElementById(id);
+
+	//First try finding an element that got a standard id
+	if (standardElement) {
+		animateScroll.scrollTo({ element: `#${id}`, offset: offset });
+		return;
+	}
+
+	//Some elements don't have a standard id (like checkbox group), so next try to scroll to its label element
+	const labelEl = document.querySelector(`[for="${id}"]`);
+	if (labelEl) {
+		animateScroll.scrollTo({ element: labelEl, offset: offset });
+		return;
+	}
 }
 
 export function CScope(suffix: string) {
