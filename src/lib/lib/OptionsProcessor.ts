@@ -176,7 +176,7 @@ export class OptionsProcessor {
 		};
 
 		//Pass in user defined options (or load user defined component) if found by matching Component Name
-		const userDefinedComponentOptions = this.opts.theComponentImports.find(
+		const userDefinedComponentOptions = this.opts.componentOptions?.find(
 			(x) => x.componentName == componentName
 		);
 
@@ -184,7 +184,7 @@ export class OptionsProcessor {
 			componentOption = { ...componentOption, ...userDefinedComponentOptions };
 		}
 
-		this.opts.theComponentImports.push(componentOption);
+		this.opts.componentOptions?.push(componentOption);
 
 		return componentOption;
 	}
@@ -212,10 +212,10 @@ export class OptionsProcessor {
 
 	private async ProcessFormDefinition() {
 		//Setup default tab if starting with empty definition
-		if (!this.opts.formDefinition.length) {
+		if (!this.opts.formDefinition?.length) {
 			const definition: FormDefinition = { rows: [] };
 			this.SetupDefaultTab(definition);
-			this.opts.formDefinition.push(definition);
+			this.opts.formDefinition?.push(definition);
 		}
 
 		for (const definitions of this.opts.formDefinition) {

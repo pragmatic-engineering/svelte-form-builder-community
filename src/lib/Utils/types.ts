@@ -174,7 +174,7 @@ import type { ColumnComponent } from 'tabulator-tables';
 import type { ThemeType } from '$lib/Utils/Misc/Theme';
 
 export interface BuilderOptions {
-	theComponentImports?: ComponentOptions[];
+	componentOptions?: ComponentOptions[];
 	disableComponents?: FormComponentsType[];
 	disableCategories?: string[]; //Disables categories
 	disabledHtmlAttributes?: HTMLAttributesKeys[]; //(Global) Hides these from being visible as properties user can change

@@ -383,7 +383,7 @@
 		disableComponents: [],
 		disableCategories: ['Internal'],
 		disabledHtmlAttributes: ['spellcheck', 'id'],
-		theComponentImports: [
+		componentOptions: [
 			{
 				componentName: 'Text',
 				categories: ['Input'],

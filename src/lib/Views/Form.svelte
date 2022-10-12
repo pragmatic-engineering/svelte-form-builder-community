@@ -149,7 +149,7 @@
 							{:else}
 								<p>
 									A Component with name <b>{field.componentName}</b> was not provided -- Check the
-									imports provided in the <b>theComponentImports</b> prop & case sensitivity of componentName
+									imports provided in the <b>componentOptions</b> prop & case sensitivity of componentName
 								</p>
 							{/if}
 						{/each}

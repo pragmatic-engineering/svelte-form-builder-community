@@ -29,8 +29,8 @@
 	import Form from '$lib/Views/Form.svelte';
 	import PinnedComponentSelection from '$lib/ComponentSelection/PinnedComponentSelection.svelte';
 
-	export let options: BuilderOptions;
-	OptionsProcessor.loadDefaults(options);
+	export let options: Partial<BuilderOptions>;
+	OptionsProcessor.loadDefaults(options as BuilderOptions);
 
 	export const builderAPI = BuilderAPI;
 	export const renderAPI = RenderAPI;

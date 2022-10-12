@@ -7,7 +7,7 @@ import type { HTMLAttributesKeys } from '$lib/Utils/types';
 import { get } from 'svelte/store';
 
 function GetUserDefinedComponentOptions(componentName: FormComponentsType) {
-	return get(opts).theComponentImports.find((x) => x.componentName == componentName);
+	return get(opts).componentOptions?.find((x) => x.componentName == componentName);
 }
 
 export function GetComponentSelectionMetaData(

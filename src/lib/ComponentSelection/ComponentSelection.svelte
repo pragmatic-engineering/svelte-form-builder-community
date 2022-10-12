@@ -104,13 +104,15 @@
 		}
 
 		//User defined components or overrides
-		for (const item of $opts.theComponentImports.filter(
-			(x) => x.importPath && !allComponentList.some((y) => y.componentName == x.componentName)
-		)) {
-			const metaData = GetComponentSelectionMetaData(item.componentName as FormComponentsType);
-			appendCategories(metaData.categories);
+		if ($opts.componentOptions) {
+			for (const item of $opts.componentOptions.filter(
+				(x) => x.importPath && !allComponentList.some((y) => y.componentName == x.componentName)
+			)) {
+				const metaData = GetComponentSelectionMetaData(item.componentName as FormComponentsType);
+				appendCategories(metaData.categories);
 
-			allComponentList = [...allComponentList, { ...item, ...metaData }];
+				allComponentList = [...allComponentList, { ...item, ...metaData }];
+			}
 		}
 
 		//Restore last used category
