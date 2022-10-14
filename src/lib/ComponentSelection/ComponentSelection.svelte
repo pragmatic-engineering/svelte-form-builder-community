@@ -273,7 +273,7 @@
 		{/if}
 
 		<div class="menuContainer">
-			<DropdownMenu bind:menuOpen showRight="0px">
+			<DropdownMenu bind:menuOpen showRight={$componentSelectionPoppedOut ? '' : '0px'}>
 				<div class="menuItems">
 					{#if !isMinimized}
 						{#if !$componentSelectionPoppedOut}
