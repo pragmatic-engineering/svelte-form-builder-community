@@ -101,8 +101,8 @@
 	}
 
 	li.active > span {
-		color: #495057;
-		background-color: #fff;
+		color: var(--svelte-fb-active-tab-color);
+		background-color: var(--svelte-fb-active-tab-background-color);
 		border-color: #dee2e6 #dee2e6 #fff;
 	}
 </style>

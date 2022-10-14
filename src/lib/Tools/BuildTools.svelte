@@ -92,7 +92,7 @@
 		class="tool-button"
 		on:click={() => {
 			DefinitionManager.clearData(TabManager.getActiveTabDefinition().tab);
-		}}><span>Clear Current Tab</span></button
+		}}>Clear Current Tab</button
 	>
 {/if}
 

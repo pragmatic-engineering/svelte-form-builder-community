@@ -241,13 +241,15 @@
 	let isShrunk = false;
 
 	let specialCategories = ['starred', 'Common'];
+	let menuItemSize = '20';
 </script>
 
 <div
 	class="main"
 	bind:this={main}
-	style:border={isMinimized ? '2px solid red' : '2px solid black'}
-	style:max-height={$opts.styling?.componentSelectionStyle?.maxHeight}
+	style:border={isMinimized ? '2px solid red' : $opts.styling?.componentSelection?.css?.border}
+	style:max-height={$opts.styling?.componentSelection?.css?.maxHeight}
+	style:background={$opts.styling?.componentSelection?.css?.background}
 >
 	<div class="header-controls">
 		{#if !isShrunk}
@@ -278,7 +280,9 @@
 							<div title="Popout">
 								<Icon
 									type="Popout"
+									size={menuItemSize}
 									enableAlternate={true}
+									alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
 									on:click={(e) => {
 										$componentSelectionPoppedOut = !$componentSelectionPoppedOut;
 									}}
@@ -288,7 +292,9 @@
 							<div title="Pin">
 								<Icon
 									type="Popin"
+									size={menuItemSize}
 									enableAlternate={true}
+									alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
 									on:click={(e) => {
 										$componentSelectionPoppedOut = !$componentSelectionPoppedOut;
 									}}
@@ -301,7 +307,9 @@
 						<div title="Minimize">
 							<Icon
 								type="Minimize"
+								size={menuItemSize}
 								enableAlternate={true}
+								alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
 								on:click={(e) => {
 									$componentSelectionPoppedOut = true;
 									isMinimized = true;
@@ -317,7 +325,9 @@
 						<div title="Maximize">
 							<Icon
 								type="Maximize"
+								size={menuItemSize}
 								enableAlternate={true}
+								alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
 								on:click={(e) => {
 									isMinimized = false;
 									localStorage.setItem(
@@ -334,7 +344,9 @@
 							<div title="Shrink">
 								<Icon
 									type="ArrowLeft"
+									size={menuItemSize}
 									enableAlternate={true}
+									alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
 									on:click={(e) => {
 										isShrunk = true;
 										menuOpen = false;
@@ -345,7 +357,9 @@
 							<div title="Unshrink">
 								<Icon
 									type="ArrowRight"
+									size={menuItemSize}
 									enableAlternate={true}
+									alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
 									on:click={(e) => {
 										isShrunk = false;
 										menuOpen = false;
@@ -481,9 +495,11 @@
 		padding-bottom: 7px;
 		padding-left: 3px;
 	}
+
 	.component-selection:hover {
-		background-color: #eaeff0;
+		background-color: var(--svelte-fb-component-selection-hover-background-color);
 	}
+
 	.component-spacer {
 		border-bottom: 1px solid #c6cdce;
 	}

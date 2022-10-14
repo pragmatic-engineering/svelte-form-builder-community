@@ -4,8 +4,6 @@
 	import { fade } from 'svelte/transition';
 
 	let dropzone: HTMLDivElement;
-	// let normalBackgroundColor = '#eaeff0';
-	// let hoverBackgroundColor = 'yellow';
 	export let height = '16px';
 	export let text = '';
 
@@ -15,14 +13,7 @@
 			//Doing this work around due to bug in Chromium where setting flex basis directly caused the rendering to lock up and not work
 			setTimeout(() => {
 				if (dropzone) {
-					// dropzone.style.flexBasis = "1000px";
-					// dropzone.style.border = '1px dashed #0d99f2';
-					// dropzone.style.backgroundColor = normalBackgroundColor;
-					// dropzone.style.borderRadius = '5px';
-					// dropzone.style.height = height;
-					// dropzone.style.margin = '10px';
-
-					const style = get(opts).styling?.dragNDropTopBottomStyle;
+					const style = get(opts).styling?.form?.cssDragNDropTopBottom;
 					dropzone.style.border = style?.border as string;
 					dropzone.style.backgroundColor = style?.backgroundColor as string;
 					dropzone.style.borderRadius = style?.borderRadius as string;
@@ -46,7 +37,8 @@
 		event.preventDefault();
 
 		isOver = true;
-		dropzone.style.backgroundColor = get(opts).styling?.dragNDropHoverBackgroundColor as string;
+		dropzone.style.backgroundColor = get(opts).styling?.form
+			?.dragNDropHoverBackgroundColor as string;
 	}
 
 	function dragLeave(event: DragEvent) {
@@ -64,5 +56,13 @@
 	on:dragover={(e) => dragOver(e)}
 	on:drop
 >
-	{text}
+	<span style:color={get(opts).styling?.form?.emptyFormTextColor ?? 'unset'}>{text}</span>
 </div>
+
+<style>
+	div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+</style>

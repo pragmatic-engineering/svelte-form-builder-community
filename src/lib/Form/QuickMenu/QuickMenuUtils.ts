@@ -31,7 +31,7 @@ export class QuickMenuUtils {
 			if ((path as HTMLDivElement).classList) {
 				if ((path as HTMLDivElement).classList.contains(CScope('control'))) {
 					// (path as HTMLDivElement).classList.add('pointerOverField');
-					(path as HTMLDivElement).style.border = get(opts).styling
+					(path as HTMLDivElement).style.border = get(opts).styling?.form
 						?.pointerOverComponentBorder as string;
 				}
 			}

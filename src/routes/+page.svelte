@@ -229,30 +229,59 @@
 
 	let options: BuilderOptions = {
 		view: 'build',
-		styling: {
-			primaryBackground:
-				'linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%)',
-			propertyPanelHeaderBackground: 'black',
-			checkboxColor: 'success',
-			pointerOverComponentBorder: '1px solid black',
-			dragNDropHoverBackgroundColor: '#d1ccff',
-			dragNDropLeftRightStyle: {
-				border: '3px dashed black',
-				backgroundColor: '#fafafa',
-				borderRadius: '5px',
-				height: '32px',
-				margin: '10px',
-				marginBottom: '10px'
-			},
-			dragNDropTopBottomStyle: {
-				border: '1px dashed black',
-				backgroundColor: '#eaeff0',
-				borderRadius: '5px',
-				height: '16px',
-				margin: '10px'
-			},
-			componentSelectionStyle: { maxHeight: '40vh' }
-		},
+		theme: 'Default',
+		// styling: {
+		// 	root: {
+		// 		css: {
+		// 			color: 'white',
+		// 			backgroundColor: '#121212',
+		// 			background: '#121212'
+		// 		},
+		// 		cssDropDownMenu: {
+		// 			backgroundColor: '#121212'
+		// 		},
+		// 		primaryBackground: '#121212',
+		// 		checkboxColor: 'success',
+		// 		toolButtonBackgroundColor: 'yellow',
+		// 		toolButtonColor: 'black',
+		// 		toolButtonHoverBackgroundColor: 'white'
+		// 	},
+		// 	form: {
+		// 		pointerOverComponentBorder: '1px solid black',
+		// 		dragNDropHoverBackgroundColor: '#d1ccff',
+		// 		emptyFormTextColor: 'black',
+		// 		cssDragNDropLeftRight: {
+		// 			border: '3px dashed black',
+		// 			backgroundColor: '#fafafa',
+		// 			borderRadius: '5px',
+		// 			height: '32px',
+		// 			margin: '10px',
+		// 			marginBottom: '10px'
+		// 		},
+		// 		cssDragNDropTopBottom: {
+		// 			border: '1px dashed black',
+		// 			backgroundColor: 'yellow',
+		// 			borderRadius: '5px',
+		// 			height: '16px',
+		// 			margin: '10px'
+		// 		}
+		// 	},
+		// 	propertyPanel: {
+		// 		propertyPanelHeaderBackground: 'black'
+		// 	},
+		// 	componentSelection: {
+		// 		css: {
+		// 			maxHeight: '40vh',
+		// 			background: '#121212'
+		// 		},
+		// 		utilityMenuHoverColor: 'red',
+		// 		componentItemHoverBackgroundColor: 'purple'
+		// 	},
+		// 	tab: {
+		// 		activeTabColor: 'white',
+		// 		activeTabBackgroundColor: 'purple'
+		// 	}
+		// },
 		builderAPIEvents: {
 			onComponentAdded: (field: Field) => {
 				if (field.componentName == 'Number') {

@@ -7,14 +7,13 @@
 <style>
 	.center {
 		display: flex;
-		align-items: center;
 		justify-content: center;
 	}
 	.loader {
 		display: inline-block;
 		width: 80px;
 		height: 80px;
-		margin-top: 10%;
+		min-height: 30vh;
 	}
 	.loader:after {
 		content: ' ';

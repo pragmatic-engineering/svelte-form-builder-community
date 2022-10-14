@@ -15,6 +15,7 @@
 			$tabPropertiesOpen = !$tabPropertiesOpen;
 		}}
 		enableAlternate={true}
+		alternateFill="blue"
 		size="20px"
 	/>
 	<Icon
@@ -23,8 +24,8 @@
 			TabManager.deleteTab(tab, $opts.confirmRemoveTab);
 		}}
 		enableAlternate={true}
-		size="20px"
 		alternateFill="red"
+		size="20px"
 		marginLeft={'10px'}
 	/>
 </DropdownMenu>

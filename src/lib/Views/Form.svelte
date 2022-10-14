@@ -70,7 +70,7 @@
 </script>
 
 {#if $view == 'build' || $rendering}
-	<div class:tabBox={$opts.enableTabs} in:fade style="flex-grow: 2;">
+	<div in:fade style="flex-grow: 2;">
 		{#if rows.length > 0}
 			{#each [...rows] as row, rowIndex}
 				<!-- Top Dropzone -->
@@ -202,17 +202,6 @@
 		font-size: 16px;
 		line-height: 2rem;
 	}
-
-	/* .svelte-fb-container :global(.pointerOverField) {
-		border: 1px solid #00a4bd;
-	} */
-
-	.tabBox {
-		padding: 5px;
-		border: 1px solid #dee2e6;
-		border-top: 0;
-	}
-
 	@media only screen and (max-width: 500px) {
 		.svelte-fb-row {
 			flex-direction: column;

@@ -139,7 +139,8 @@
 		margin: auto;
 		width: 50%;
 		padding: 10px;
-		background-color: white;
+		background-color: var(--svelte-fb-root-dropdown-background-color);
+		color: var(--svelte-fb-root-color);
 		border-radius: 4px;
 		margin-bottom: 10px;
 	}

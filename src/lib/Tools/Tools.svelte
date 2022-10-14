@@ -37,13 +37,14 @@
 	</div>
 
 	<div class="content" style:border-left={contentData ? '1px solid black' : ''}>
-		<div>
+		<div style="display:flex">
 			{#if contentData}
-				<button on:click={() => (contentData = '')} title="Clear">
+				<button class="tool-button" on:click={() => (contentData = '')} title="Clear">
 					<Icon type="Close" />
 				</button>
 
 				<button
+					class="tool-button"
 					title="Copy to Clipboard"
 					on:click={async () => {
 						navigator.clipboard.writeText(contentData);
@@ -89,5 +90,10 @@
 	.sidebar {
 		display: flex;
 		flex-direction: column;
+	}
+
+	pre {
+		background: var(--svelte-fb-root-background-color);
+		color: var(--svelte-fb-root-color);
 	}
 </style>

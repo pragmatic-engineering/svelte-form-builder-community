@@ -199,7 +199,6 @@ export interface BuilderOptions {
 	disabledBuildTools?: DisabledBuildTools;
 	customBuildTools?: CustomToolButton[];
 	customRenderTools?: CustomToolButton[];
-
 	disabledRenderTools?: DisabledRenderTools;
 	view?: views;
 	theme?: ThemeType;
@@ -207,14 +206,49 @@ export interface BuilderOptions {
 }
 
 export interface StyleConfig {
-	primaryBackground?: string;
-	propertyPanelHeaderBackground?: string;
+	root?: RootStyles;
+	header?: HeaderStyles;
+	propertyPanel?: PropertyPanelStyles;
+	form?: FormStyles;
+	componentSelection?: ComponentSelectionStyles;
+	tab?: TabStyles;
+}
+
+export interface RootStyles {
 	checkboxColor?: ChoiceColorType;
+	css?: Partial<CSSStyleDeclaration>;
+	cssDropDownMenu?: Partial<CSSStyleDeclaration>;
+	toolButtonColor?: string;
+	toolButtonBackgroundColor?: string;
+	toolButtonHoverBackgroundColor?: string;
+}
+
+export interface HeaderStyles {
+	css?: Partial<CSSStyleDeclaration>;
+}
+
+export interface PropertyPanelStyles {
+	propertyPanelHeaderBackground?: string;
+	propertyPanelBackground?: string;
+}
+
+export interface FormStyles {
 	pointerOverComponentBorder?: string;
 	dragNDropHoverBackgroundColor?: string;
-	dragNDropLeftRightStyle?: Partial<CSSStyleDeclaration>;
-	dragNDropTopBottomStyle?: Partial<CSSStyleDeclaration>;
-	componentSelectionStyle?: Partial<CSSStyleDeclaration>;
+	emptyFormTextColor?: string;
+	cssDragNDropLeftRight?: Partial<CSSStyleDeclaration>;
+	cssDragNDropTopBottom?: Partial<CSSStyleDeclaration>;
+}
+
+export interface ComponentSelectionStyles {
+	componentItemHoverBackgroundColor?: string;
+	utilityMenuHoverColor?: string;
+	css?: Partial<CSSStyleDeclaration>;
+}
+
+export interface TabStyles {
+	activeTabColor?: string;
+	activeTabBackgroundColor?: string;
 }
 
 interface CustomToolButton {

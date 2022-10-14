@@ -2,7 +2,7 @@
 	import { opts } from '$lib/Utils/store';
 </script>
 
-<div class="propertyPanel" style:background={$opts.styling?.primaryBackground}>
+<div class="propertyPanel" style:background={$opts.styling?.propertyPanel?.propertyPanelBackground}>
 	<slot />
 </div>
 
@@ -16,8 +16,6 @@
 		right: 0;
 		border-left: 3px solid black;
 		border-top: 1px solid black;
-		background-color: white;
-		/* background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%); */
 	}
 
 	.propertyPanel :global(.propertyPanelHeader) {
@@ -25,9 +23,6 @@
 		justify-content: space-between;
 		padding: 7px;
 		border-bottom: 1px dotted black;
-		color: white;
-		/* background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
-			radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898; */
 		user-select: none;
 	}
 
@@ -45,6 +40,7 @@
 	.propertyPanel :global(* [contenteditable]) {
 		/* color: red; */
 		cursor: text;
+		color: black;
 		background-color: white;
 		border: 1px solid black;
 	}

@@ -26,7 +26,8 @@
 		padding: 7px;
 		display: none;
 		position: fixed;
-		background-color: #f6f6f6;
+		background-color: var(--svelte-fb-root-dropdown-background-color);
+		color: var(--svelte-fb-root-color);
 		border: 1px solid #ddd;
 		z-index: 2;
 	}

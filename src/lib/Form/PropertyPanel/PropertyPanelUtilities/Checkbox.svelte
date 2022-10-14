@@ -14,11 +14,11 @@
 	<input type="checkbox" {id} bind:checked={value} />
 	<div
 		class="state p-primary"
-		class:p-primary={$opts.styling?.checkboxColor == 'primary'}
-		class:p-success={$opts.styling?.checkboxColor == 'success'}
-		class:p-warning={$opts.styling?.checkboxColor == 'warning'}
-		class:p-info={$opts.styling?.checkboxColor == 'info'}
-		class:p-danger={$opts.styling?.checkboxColor == 'danger'}
+		class:p-primary={$opts.styling?.root?.checkboxColor == 'primary'}
+		class:p-success={$opts.styling?.root?.checkboxColor == 'success'}
+		class:p-warning={$opts.styling?.root?.checkboxColor == 'warning'}
+		class:p-info={$opts.styling?.root?.checkboxColor == 'info'}
+		class:p-danger={$opts.styling?.root?.checkboxColor == 'danger'}
 	>
 		<div style:font-size={fontSize}>
 			<Icon type="SquareCheck" />

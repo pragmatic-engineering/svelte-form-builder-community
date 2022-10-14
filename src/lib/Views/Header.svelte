@@ -22,7 +22,8 @@
 	style:height
 	style:gap
 	style:font-size={fontSize}
-	style:background={$opts.styling?.primaryBackground}
+	style:background={$opts.styling?.header?.css?.background ?? 'unset'}
+	style:border={$opts.styling?.header?.css?.border ?? 'unset'}
 >
 	<div class="menu">
 		<slot />
@@ -47,7 +48,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		/* background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%); */
 		text-transform: uppercase;
 		font-weight: 500;
 		flex-grow: 1;
@@ -81,5 +81,7 @@
 		padding-left: 5px;
 		flex-grow: 1;
 		line-height: 0;
+		background: unset;
+		background-color: unset;
 	}
 </style>

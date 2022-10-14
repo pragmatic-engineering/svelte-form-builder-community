@@ -47,7 +47,32 @@
 	$: showToolsIcon = !$opts.disabledViews?.tools && ($view == 'build' || $view == 'preview');
 </script>
 
-<div class={CScope('root')}>
+<div
+	class={CScope('root')}
+	style="
+	--svelte-fb-root-color:{$opts.styling?.root?.css?.color ?? 'unset'};
+	--svelte-fb-root-background-color: {$opts.styling?.root?.css?.backgroundColor ?? 'unset'};
+
+	--svelte-fb-root-tool-button-background-color: {$opts.styling?.root?.toolButtonBackgroundColor ??
+		'#fafbfc'};
+	--svelte-fb-root-tool-button-color: {$opts.styling?.root?.toolButtonColor ?? '#24292e'};
+	--svelte-fb-root-tool-button-hover-background-color: {$opts.styling?.root
+		?.toolButtonHoverBackgroundColor ?? '#f3f4f6'};
+
+
+	--svelte-fb-root-dropdown-background-color: {$opts.styling?.root?.cssDropDownMenu
+		?.backgroundColor ?? '#f6f6f6'};
+	
+	--svelte-fb-active-tab-color:{$opts.styling?.tab?.activeTabColor ?? '#fff'};
+	--svelte-fb-active-tab-background-color:{$opts.styling?.tab?.activeTabBackgroundColor ?? '#eaeff0'};
+
+	--svelte-fb-component-selection-hover-background-color:{$opts.styling?.componentSelection
+		?.componentItemHoverBackgroundColor ?? 'unset'};
+	"
+	style:color={$opts.styling?.root?.css?.color ?? 'unset'}
+	style:background={$opts.styling?.root?.css?.background ?? 'unset'}
+	style:background-color1={$opts.styling?.root?.css?.backgroundColor ?? 'unset'}
+>
 	{#if $view == 'build' || $view == 'preview' || $view == 'settings'}
 		<Header
 			selectedValue={$view}
@@ -82,12 +107,7 @@
 			]}
 		>
 			<span title="Tools" style:display={!showToolsIcon ? 'none' : ''}>
-				<Icon
-					type="Tools"
-					on:click={() => (showTools = !showTools)}
-					enableAlternate={true}
-					size="20px"
-				/>
+				<Icon type="Tools" on:click={() => (showTools = !showTools)} size="20px" />
 			</span>
 		</Header>
 
@@ -146,7 +166,6 @@
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 			'Open Sans', 'Helvetica Neue', sans-serif;
 	}
-
 	.svelte-fb-root :global(.isDraggingTab) {
 		border: 1px dashed #0d99f2 !important;
 		border-radius: 4px !important;
@@ -163,9 +182,10 @@
 	}
 
 	.svelte-fb-root :global(.tool-button) {
-		background-color: #fafbfc;
+		border-radius: 0px;
 		border: 1px solid rgba(27, 31, 35, 0.15);
-		color: #24292e;
+		color: var(--svelte-fb-root-tool-button-color);
+		background-color: var(--svelte-fb-root-tool-button-background-color);
 		font-size: 14px;
 		font-weight: 500;
 		line-height: 20px;
@@ -180,7 +200,7 @@
 	}
 
 	.svelte-fb-root :global(.tool-button:hover) {
-		background-color: #f3f4f6;
+		background-color: var(--svelte-fb-root-tool-button-hover-background-color);
 		border: 1px solid black;
 	}
 
@@ -188,5 +208,9 @@
 		display: flex;
 		/* justify-content: center; */
 		justify-content: space-between;
+	}
+
+	.svelte-fb-root :global(*) {
+		color-scheme: normal;
 	}
 </style>

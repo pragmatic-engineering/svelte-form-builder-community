@@ -4,8 +4,6 @@
 	import { scale } from 'svelte/transition';
 
 	let dropzone: HTMLDivElement;
-	// let normalBackgroundColor = "#e5f5f8";
-	// let hoverBackgroundColor = "yellow";
 
 	let isOver = false;
 	$: {
@@ -13,14 +11,7 @@
 			//Doing this work around due to bug in Chromium where setting flex basis directly caused the rendering to lock up and not work
 			setTimeout(() => {
 				if (dropzone) {
-					// dropzone.style.border = "1px dashed #0d99f2";
-					// dropzone.style.backgroundColor = normalBackgroundColor;
-					// dropzone.style.borderRadius = "5px";
-					// dropzone.style.height = "32px";
-					// dropzone.style.margin = "10px";
-					// dropzone.style.marginBottom = "10px";
-
-					const style = get(opts).styling?.dragNDropLeftRightStyle;
+					const style = get(opts).styling?.form?.cssDragNDropLeftRight;
 					dropzone.style.border = style?.border as string;
 					dropzone.style.backgroundColor = style?.backgroundColor as string;
 					dropzone.style.borderRadius = style?.borderRadius as string;
@@ -40,7 +31,8 @@
 		event.preventDefault();
 
 		isOver = true;
-		dropzone.style.backgroundColor = get(opts).styling?.dragNDropHoverBackgroundColor as string;
+		dropzone.style.backgroundColor = get(opts).styling?.form
+			?.dragNDropHoverBackgroundColor as string;
 	}
 
 	function dragLeave(event: DragEvent) {
