@@ -8,7 +8,7 @@
 		type Field,
 		type FormComponentsType
 	} from '$lib/Utils/types';
-	import { onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import { DragNDrop } from '$lib/Form/DragNDrop/DragNDrop';
 	import { TabManager } from '$lib/Tabs/TabManager';
 	import { dragElement } from '$lib/ComponentSelection/DragNDropComponentSelection';
@@ -242,6 +242,18 @@
 
 	let specialCategories = ['starred', 'Common'];
 	let menuItemSize = '20';
+
+	//Enforce the component selection can't go beyone the right end of the window
+	function checkBoundary() {
+		if (Object.keys(main).length > 0) {
+			if (main.getBoundingClientRect().x + main.getBoundingClientRect().width > window.innerWidth) {
+				setLeftBoundary();
+			}
+		}
+	}
+	afterUpdate(() => {
+		checkBoundary();
+	});
 </script>
 
 <div
@@ -273,9 +285,26 @@
 		{/if}
 
 		<div class="menuContainer">
-			<DropdownMenu bind:menuOpen showRight={$componentSelectionPoppedOut ? '' : '0px'}>
-				<div class="menuItems">
-					{#if !isMinimized}
+			{#if isMinimized}
+				<div title="Maximize">
+					<Icon
+						type="Maximize"
+						size={menuItemSize}
+						enableAlternate={true}
+						alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
+						on:click={(e) => {
+							isMinimized = false;
+							localStorage.setItem(
+								storage_componentSelectionMinimized,
+								JSON.stringify(isMinimized)
+							);
+							checkBoundary();
+						}}
+					/>
+				</div>
+			{:else}
+				<DropdownMenu bind:menuOpen showRight={$componentSelectionPoppedOut ? '' : '0px'}>
+					<div class="menuItems">
 						{#if !$componentSelectionPoppedOut}
 							<div title="Popout">
 								<Icon
@@ -301,9 +330,7 @@
 								/>
 							</div>
 						{/if}
-					{/if}
 
-					{#if !isMinimized}
 						<div title="Minimize">
 							<Icon
 								type="Minimize"
@@ -321,25 +348,7 @@
 								}}
 							/>
 						</div>
-					{:else}
-						<div title="Maximize">
-							<Icon
-								type="Maximize"
-								size={menuItemSize}
-								enableAlternate={true}
-								alternateFill={$opts.styling?.componentSelection?.utilityMenuHoverColor}
-								on:click={(e) => {
-									isMinimized = false;
-									localStorage.setItem(
-										storage_componentSelectionMinimized,
-										JSON.stringify(isMinimized)
-									);
-								}}
-							/>
-						</div>
-					{/if}
 
-					{#if !isMinimized}
 						{#if !isShrunk}
 							<div title="Shrink">
 								<Icon
@@ -367,9 +376,9 @@
 								/>
 							</div>
 						{/if}
-					{/if}
-				</div>
-			</DropdownMenu>
+					</div>
+				</DropdownMenu>
+			{/if}
 		</div>
 
 		{#if $componentSelectionPoppedOut}
