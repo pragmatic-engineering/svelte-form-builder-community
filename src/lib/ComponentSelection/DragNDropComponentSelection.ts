@@ -44,9 +44,10 @@ export function dragElement(
 		}
 
 		const elShape = el.getBoundingClientRect();
+		const elComputedStyle = getComputedStyle(el);
 
 		//Prevent dragging past the right
-		if (elShape.x + parseInt(componentSelectionStyle.width) >= window.innerWidth - 10) {
+		if (parseInt(elComputedStyle.right) < 0) {
 			el.style.left = parseInt(el.style.left, 10) - 1 + 'px';
 			return;
 		}

@@ -259,7 +259,9 @@
 <div
 	class="main"
 	bind:this={main}
-	style:border={isMinimized ? '2px solid red' : $opts.styling?.componentSelection?.css?.border}
+	style:border={isMinimized
+		? $opts.styling?.componentSelection?.minimizedBorder
+		: $opts.styling?.componentSelection?.css?.border}
 	style:max-height={$opts.styling?.componentSelection?.css?.maxHeight}
 	style:background={$opts.styling?.componentSelection?.css?.background}
 >

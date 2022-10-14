@@ -244,6 +244,7 @@ export interface ComponentSelectionStyles {
 	componentItemHoverBackgroundColor?: string;
 	utilityMenuHoverColor?: string;
 	css?: Partial<CSSStyleDeclaration>;
+	minimizedBorder?: string;
 }
 
 export interface TabStyles {

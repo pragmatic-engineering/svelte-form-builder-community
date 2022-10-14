@@ -54,7 +54,8 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 				border: '2px solid black'
 			},
 			utilityMenuHoverColor: 'purple',
-			componentItemHoverBackgroundColor: '#E8EFFD'
+			componentItemHoverBackgroundColor: '#E8EFFD',
+			minimizedBorder: '4px solid red'
 		},
 		tab: {
 			activeTabColor: 'black',
@@ -111,7 +112,8 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 				border: '2px solid #7e57c2cc'
 			},
 			utilityMenuHoverColor: '#7e57c2',
-			componentItemHoverBackgroundColor: '#7e57c2'
+			componentItemHoverBackgroundColor: '#7e57c2',
+			minimizedBorder: '4px solid #7e57c2'
 		},
 		tab: {
 			activeTabColor: '#fff',
