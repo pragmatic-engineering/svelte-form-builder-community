@@ -484,6 +484,7 @@
 		z-index: 9;
 		background-color: white;
 		overflow-y: scroll;
+		border-radius: 4px;
 	}
 
 	.drag-handle {
