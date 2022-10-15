@@ -236,6 +236,7 @@ export interface FormStyles {
 	pointerOverComponentBorder?: string;
 	dragNDropHoverBackgroundColor?: string;
 	emptyFormTextColor?: string;
+	emptyFormMinHeight?: string;
 	cssDragNDropLeftRight?: Partial<CSSStyleDeclaration>;
 	cssDragNDropTopBottom?: Partial<CSSStyleDeclaration>;
 }

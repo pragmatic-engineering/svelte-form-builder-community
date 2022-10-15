@@ -31,6 +31,7 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 			pointerOverComponentBorder: '1px solid #00a4bd',
 			dragNDropHoverBackgroundColor: 'yellow',
 			emptyFormTextColor: 'black',
+			emptyFormMinHeight: '40vh',
 			cssDragNDropLeftRight: {
 				border: '1px dashed #0d99f2',
 				backgroundColor: '#e5f5f8',
@@ -89,6 +90,7 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 			pointerOverComponentBorder: '1px solid #ffffff',
 			dragNDropHoverBackgroundColor: '#5f7e97',
 			emptyFormTextColor: '#fff',
+			emptyFormMinHeight: '40vh',
 			cssDragNDropLeftRight: {
 				border: '1px dashed #5f7e9779',
 				backgroundColor: '#5f7e97',

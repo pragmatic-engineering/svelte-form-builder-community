@@ -56,13 +56,17 @@
 	on:dragover={(e) => dragOver(e)}
 	on:drop
 >
-	<span style:color={get(opts).styling?.form?.emptyFormTextColor ?? 'unset'}>{text}</span>
+	<span
+		style:min-height={get(opts).styling?.form?.emptyFormMinHeight ?? 'unset'}
+		style:color={get(opts).styling?.form?.emptyFormTextColor ?? 'unset'}>{text}</span
+	>
 </div>
 
 <style>
-	div {
+	span {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		height: 100%;
 	}
 </style>
