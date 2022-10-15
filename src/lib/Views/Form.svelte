@@ -10,7 +10,8 @@
 		view,
 		componentInstances,
 		isComponentDragging,
-		rendering
+		rendering,
+		formMounted
 	} from '$lib/Utils/store';
 	import LeftRightDropTarget from '$lib/Form/DragNDrop/LeftRight.svelte';
 	import TopBottomDropTarget from '$lib/Form/DragNDrop/TopBottom.svelte';
@@ -25,6 +26,7 @@
 		if ($opts.builderAPIEvents?.onFormMounted) {
 			$opts.builderAPIEvents?.onFormMounted.call(undefined, definition);
 		}
+		$formMounted = true;
 	});
 
 	export let definition: FormDefinition;

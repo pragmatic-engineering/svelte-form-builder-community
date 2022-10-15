@@ -7,7 +7,8 @@
 		showPropertyPanel,
 		propertyField,
 		optionsProcessorStore,
-		mainDefinition
+		mainDefinition,
+		formMounted
 	} from '$lib/Utils/store';
 	import ComponentSelection from '$lib/ComponentSelection/ComponentSelection.svelte';
 	import DragImage from '$lib/Utils/MiscComponents/DragImage.svelte';
@@ -47,6 +48,10 @@
 	$: showToolsIcon = !$opts.disabledViews?.tools && ($view == 'build' || $view == 'preview');
 </script>
 
+{#if !$formMounted}
+	<Loader />
+{/if}
+
 <div
 	class={CScope('root')}
 	style="
@@ -71,7 +76,8 @@
 	"
 	style:color={$opts.styling?.root?.css?.color ?? 'unset'}
 	style:background={$opts.styling?.root?.css?.background ?? 'unset'}
-	style:background-color1={$opts.styling?.root?.css?.backgroundColor ?? 'unset'}
+	style:background-color={$opts.styling?.root?.css?.backgroundColor ?? 'unset'}
+	style:display={$formMounted ? 'block' : 'none'}
 >
 	{#if $view == 'build' || $view == 'preview' || $view == 'settings'}
 		<Header
@@ -116,9 +122,7 @@
 		{/if}
 	{/if}
 
-	{#await $optionsProcessorStore.init()}
-		<Loader />
-	{:then}
+	{#await $optionsProcessorStore.init() then}
 		{#if $opts.enableTabs == true}
 			<TabHeader />
 		{/if}

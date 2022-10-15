@@ -40,3 +40,5 @@ export const componentsLoaded = writable(false);
 export const componentInstances = writable({} as Record<string, SvelteFBComponent>);
 
 export const optionsProcessorStore = writable({} as OptionsProcessor);
+
+export const formMounted = writable(false);
