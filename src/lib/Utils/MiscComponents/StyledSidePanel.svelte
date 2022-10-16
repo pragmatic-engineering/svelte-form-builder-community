@@ -1,8 +1,22 @@
 <script lang="ts">
 	import { opts } from '$lib/Utils/store';
+	import { onMount } from 'svelte';
+
+	let top: string;
+	onMount(() => {
+		const mainHeaderCoords = (
+			document.querySelector('.svelte-fb-main-header') as HTMLElement
+		).getBoundingClientRect();
+
+		top = `${mainHeaderCoords.y + mainHeaderCoords.height}px`;
+	});
 </script>
 
-<div class="propertyPanel" style:background={$opts.styling?.propertyPanel?.propertyPanelBackground}>
+<div
+	class="propertyPanel"
+	style:top={$opts.styling?.propertyPanel?.propertyPanelTop ?? top}
+	style:background={$opts.styling?.propertyPanel?.propertyPanelBackground}
+>
 	<slot />
 </div>
 
@@ -12,7 +26,6 @@
 		width: 33%;
 		position: fixed;
 		z-index: 99;
-		top: 35px;
 		right: 0;
 		border-left: 3px solid black;
 		border-top: 1px solid black;

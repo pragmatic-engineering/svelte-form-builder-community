@@ -80,46 +80,47 @@
 	style:display={$formMounted ? 'block' : 'none'}
 >
 	{#if $view == 'build' || $view == 'preview' || $view == 'settings'}
-		<Header
-			selectedValue={$view}
-			links={[
-				{
-					text: 'Build',
-					value: 'build',
-					onClick: () => {
-						$view = 'build';
-						RenderManager.applyDefaultValues();
+		<div class="svelte-fb-main-header">
+			<Header
+				selectedValue={$view}
+				links={[
+					{
+						text: 'Build',
+						value: 'build',
+						onClick: () => {
+							$view = 'build';
+							RenderManager.applyDefaultValues();
+						}
+					},
+					{
+						text: 'Settings',
+						value: 'settings',
+						onClick: () => {
+							$view = 'settings';
+							$showPropertyPanel = false;
+						},
+						hidden: $opts.disabledViews?.settings
+					},
+					{
+						text: 'Preview',
+						value: 'preview',
+						onClick: () => {
+							$view = 'preview';
+							$showPropertyPanel = false;
+							RenderManager.applyDefaultValues();
+						},
+						hidden: $opts.disabledViews?.render
 					}
-				},
-				{
-					text: 'Settings',
-					value: 'settings',
-					onClick: () => {
-						$view = 'settings';
-						$showPropertyPanel = false;
-					},
-					hidden: $opts.disabledViews?.settings
-				},
-				{
-					text: 'Preview',
-					value: 'preview',
-					onClick: () => {
-						$view = 'preview';
-						$showPropertyPanel = false;
-						RenderManager.applyDefaultValues();
-					},
-					hidden: $opts.disabledViews?.render
-				}
-			]}
-		>
-			<span title="Tools" style:display={!showToolsIcon ? 'none' : ''}>
-				<Icon type="Tools" on:click={() => (showTools = !showTools)} size="20px" />
-			</span>
-		</Header>
-
-		{#if showTools}
-			<Tools />
-		{/if}
+				]}
+			>
+				<span title="Tools" style:display={!showToolsIcon ? 'none' : ''}>
+					<Icon type="Tools" on:click={() => (showTools = !showTools)} size="20px" />
+				</span>
+			</Header>
+			{#if showTools}
+				<Tools />
+			{/if}
+		</div>
 	{/if}
 
 	{#await $optionsProcessorStore.init() then}

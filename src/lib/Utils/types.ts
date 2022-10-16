@@ -224,6 +224,7 @@ export interface HeaderStyles {
 export interface PropertyPanelStyles {
 	propertyPanelHeaderBackground?: string;
 	propertyPanelBackground?: string;
+	propertyPanelTop?: string;
 }
 
 export interface FormStyles {
