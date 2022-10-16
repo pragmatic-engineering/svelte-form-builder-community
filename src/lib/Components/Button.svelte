@@ -20,5 +20,7 @@
 <style>
 	button {
 		font-size: 16px;
+		border: 1px solid black;
+		border-radius: 0px;
 	}
 </style>
