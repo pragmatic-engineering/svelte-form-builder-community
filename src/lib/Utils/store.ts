@@ -30,6 +30,7 @@ export const isTabDragging = writable(false);
 
 export const isComponentSelectionDragging = writable(false);
 export const isComponentDragging = writable(false);
+export const setComponentSelectionCategory = writable('');
 
 export const view = writable('build' as views);
 

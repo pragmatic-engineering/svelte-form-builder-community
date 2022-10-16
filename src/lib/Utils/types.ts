@@ -40,14 +40,8 @@ export const FormComponents = [
 ] as const;
 export type FormComponentsType = typeof FormComponents[number];
 
-export const SponsoredComponents = [
-	'RichText',
-	'Matrix',
-	'AutoComplete',
-	'Signature',
-	'Table'
-] as const;
-export type SponsoredComponentsType = typeof SponsoredComponents[number];
+export const ProComponents = ['RichText', 'Matrix', 'AutoComplete', 'Signature', 'Table'] as const;
+export type ProComponentsType = typeof ProComponents[number];
 
 export interface Field {
 	componentName: FormComponentsType;

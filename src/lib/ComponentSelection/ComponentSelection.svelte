@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { DefinitionManager } from '$lib/lib/DefinitionManager';
-	import { componentSelectionStyle, componentSelectionPoppedOut, opts } from '$lib/Utils/store';
+	import {
+		componentSelectionStyle,
+		componentSelectionPoppedOut,
+		opts,
+		setComponentSelectionCategory
+	} from '$lib/Utils/store';
 	import {
 		FormComponents,
-		SponsoredComponents,
+		ProComponents,
 		type ComponentOptions,
 		type Field,
 		type FormComponentsType
@@ -127,7 +132,7 @@
 		//If using standard, make sure the sponsored components don't show up (there won't be a matching file to import)
 		//This will allow the component name to be used if user is implementing a custom component with the same name
 		if (flavor == 'community') {
-			components = components.filter((x) => !SponsoredComponents.includes(x));
+			components = components.filter((x) => !ProComponents.includes(x));
 		}
 
 		return components;
@@ -254,6 +259,14 @@
 	afterUpdate(() => {
 		checkBoundary();
 	});
+
+	//Programatically set category
+	$: {
+		if ($setComponentSelectionCategory) {
+			selectedComponentFilter = $setComponentSelectionCategory;
+			onFilterComponents();
+		}
+	}
 </script>
 
 <div

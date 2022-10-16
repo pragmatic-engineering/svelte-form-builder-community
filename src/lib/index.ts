@@ -5,6 +5,9 @@ import { convertDataAttributes } from '$lib/Utils/Utils';
 import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
 import type { ThemeMap } from '$lib/Utils/Misc/Theme';
+import type { FormComponents, FormComponentsType } from '$lib/Utils/types';
+import type { BuilderAPI } from '$lib/lib/API/BuilderAPI';
+import type { RenderAPI } from '$lib/lib/API/RenderAPI';
 
 export {
 	FormBuilder,
@@ -12,5 +15,9 @@ export {
 	ComponentLabel,
 	DefinitionManager,
 	convertDataAttributes,
-	ThemeMap
+	ThemeMap,
+	FormComponentsType,
+	FormComponents,
+	BuilderAPI,
+	RenderAPI
 };

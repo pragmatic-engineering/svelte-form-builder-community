@@ -3,6 +3,7 @@ import type { Field, FormTab } from '$lib/Utils/types';
 import type { FieldGroup } from '$lib/Utils/types';
 import { validateDefinitions } from '$lib/lib/Validation';
 import { TabManager } from '$lib/Tabs/TabManager';
+import { setComponentSelectionCategory } from '$lib/Utils/store';
 
 export class BuilderAPI {
 	/**
@@ -140,5 +141,11 @@ export class BuilderAPI {
 	 */
 	static clearData(tab?: FormTab) {
 		return DefinitionManager.clearData(tab);
+	}
+
+	static setComponentSelectionCategory(category: string) {
+		if (category) {
+			setComponentSelectionCategory.set(category);
+		}
 	}
 }
