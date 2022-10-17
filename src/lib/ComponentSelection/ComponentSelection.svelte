@@ -275,6 +275,7 @@
 	style:border={isMinimized
 		? $opts.styling?.componentSelection?.minimizedBorder
 		: $opts.styling?.componentSelection?.css?.border}
+	style:min-height={$opts.styling?.componentSelection?.css?.minHeight}
 	style:max-height={$opts.styling?.componentSelection?.css?.maxHeight}
 	style:background={$opts.styling?.componentSelection?.css?.background}
 >
