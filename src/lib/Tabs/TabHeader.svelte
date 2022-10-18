@@ -84,6 +84,7 @@
 		margin-top: 10px;
 	}
 	li {
+		margin: 0;
 		margin-bottom: -1px;
 	}
 
