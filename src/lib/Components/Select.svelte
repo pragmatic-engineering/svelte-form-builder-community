@@ -1,4 +1,3 @@
-<!-- https://github.com/rob-balfre/svelte-select -->
 <script lang="ts">
 	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
 	import { getErrorMessage_Required } from '$lib/lib/Validation';
