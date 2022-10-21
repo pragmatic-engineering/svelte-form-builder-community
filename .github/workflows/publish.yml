@@ -23,6 +23,7 @@ jobs:
       - run: |
           npm i
           npm run build
-          npm run sk-publish
+          cd package
+          npm publish --preid=rc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
