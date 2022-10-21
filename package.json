@@ -3,11 +3,7 @@
 	"version": "0.0.1",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/pragmatic-engineering/svelte-form-builder-community.git",
-		"directory": "@pragmatic-engineering/svelte-form-builder-community"
-	},
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/pragmatic-engineering"
+		"url": "https://github.com/pragmatic-engineering/svelte-form-builder-community.git"
 	},
 	"scripts": {
 		"dev": "vite dev",
