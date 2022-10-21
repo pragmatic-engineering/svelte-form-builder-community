@@ -1,4 +1,4 @@
-name: Publish Package
+name: Community Publish Package
 
 on:
   # push:

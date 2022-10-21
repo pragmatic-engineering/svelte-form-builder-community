@@ -1,4 +1,4 @@
-name: Commit Event
+name: Community Commit Event
 
 env:
   commit-msg: ${{ github.event.head_commit.message }}
