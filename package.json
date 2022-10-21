@@ -1,10 +1,17 @@
 {
-	"name": "svelte-form-builder-community",
-	"version": "0.0.1",
+	"name": "@pragmatic-engineering/svelte-form-builder-community",
+	"version": "0.0.2",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pragmatic-engineering/svelte-form-builder-community.git",
+		"directory": "@pragmatic-engineering/svelte-form-builder-community"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/pragmatic-engineering"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package",
-		"test": "playwright test",
 		"sk-publish": "cd package && npm publish",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -12,7 +19,6 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.25.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@sveltejs/package": "next",

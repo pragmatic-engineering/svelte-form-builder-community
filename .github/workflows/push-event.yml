@@ -21,6 +21,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.AUTOMERGE }}
-          repository: PragmaticEngineering/svelte-form-builder-pro
+          repository: pragmatic-engineering/svelte-form-builder-pro
           event-type: community-push
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "msg": "${{env.commit-msg}}"}'
