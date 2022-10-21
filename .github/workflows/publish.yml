@@ -24,6 +24,6 @@ jobs:
           npm i
           npm run build
           cd package
-          npm publish --preid=rc
+          npm version prerelease --preid=rc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
