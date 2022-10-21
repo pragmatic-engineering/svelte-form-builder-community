@@ -24,7 +24,7 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 			}
 		},
 		propertyPanel: {
-			propertyPanelHeaderBackground: '#FFFAE7',
+			propertyPanelHeaderBackground: '#E5C58A',
 			propertyPanelBackground: '#B7CCF4'
 		},
 		form: {
