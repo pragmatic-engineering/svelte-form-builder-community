@@ -112,7 +112,7 @@
 		//User defined components or overrides
 		if ($opts.componentOptions) {
 			for (const item of $opts.componentOptions.filter(
-				(x) => x.importPath && !allComponentList.some((y) => y.componentName == x.componentName)
+				(x) => x.customImport && !allComponentList.some((y) => y.componentName == x.componentName)
 			)) {
 				const metaData = GetComponentSelectionMetaData(item.componentName as FormComponentsType);
 				appendCategories(metaData.categories);

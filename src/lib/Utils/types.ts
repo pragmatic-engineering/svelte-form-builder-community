@@ -338,7 +338,7 @@ export interface ComponentDOMAttributes {
 
 export interface ComponentOptions extends ComponentSelectionMetaData, ComponentDOMAttributes {
 	componentName: FormComponentsType;
-	importPath?: string;
+	customImport?: Promise<any>;
 	validateDefinition?: (fieldInfo: FieldInfo) => ValidationResult; //Additive if also defined in component
 	validateUserInput?: (fieldInfo: FieldInfo) => ValidationResult; //Additive if also defined in component
 	events?: DOMAttributes;

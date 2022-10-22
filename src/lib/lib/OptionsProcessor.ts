@@ -90,11 +90,14 @@ export class OptionsProcessor {
 		const componentOptions = this.LoadComponent(componentName);
 
 		try {
-			if (!componentOptions.importPath) {
+			const obj = componentOptions.customImport
+				? await componentOptions.customImport
+				: await DynamicImportMap[componentName];
+
+			if (!obj || !obj.default) {
+				console.error(`No component found for ${componentName}`);
 				return;
 			}
-
-			const obj = await DynamicImportMap[componentName];
 
 			this.MergeComponentAttributes(componentOptions);
 
@@ -172,7 +175,6 @@ export class OptionsProcessor {
 
 	private LoadComponent(componentName: FormComponentsType): ComponentOptions {
 		let componentOption: ComponentOptions = {
-			importPath: `../Components/${componentName}.svelte`,
 			componentName: componentName
 		};
 
