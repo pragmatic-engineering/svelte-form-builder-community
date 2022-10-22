@@ -458,31 +458,33 @@
 			<div class="component-spacer" />
 
 			{#each filteredComponents as item}
-				<div
-					in:slide={{ duration: 400 }}
-					out:slide|local={{ duration: 400 }}
-					class="component-selection"
-					on:dragstart={(e) => DragNDrop.onComponentSelectionDragStart(e, item.componentName)}
-					on:dragend={(e) => DragNDrop.onComponentSelectionDragEnd(e, item.componentName)}
-					draggable={!$opts.disableDragNDropComponentSelection}
-					on:click={() => insertComponent(item)}
-					title={item.componentName}
-				>
-					<span title={item.componentName}>
-						{#if !$opts.disableDragNDropComponentSelection}
-							<Icon type="VerticalGrip" />
-						{:else}
-							<Icon type="Empty" size="1px" />
+				{#if item}
+					<div
+						in:slide={{ duration: 400 }}
+						out:slide|local={{ duration: 400 }}
+						class="component-selection"
+						on:dragstart={(e) => DragNDrop.onComponentSelectionDragStart(e, item.componentName)}
+						on:dragend={(e) => DragNDrop.onComponentSelectionDragEnd(e, item.componentName)}
+						draggable={!$opts.disableDragNDropComponentSelection}
+						on:click={() => insertComponent(item)}
+						title={item.componentName}
+					>
+						<span title={item.componentName}>
+							{#if !$opts.disableDragNDropComponentSelection}
+								<Icon type="VerticalGrip" />
+							{:else}
+								<Icon type="Empty" size="1px" />
+							{/if}
+						</span>
+
+						{@html item.icon ?? ''}
+
+						{#if !isShrunk}
+							{item.componentName}
 						{/if}
-					</span>
-
-					{@html item.icon ?? ''}
-
-					{#if !isShrunk}
-						{item.componentName}
-					{/if}
-				</div>
-				<div class="component-spacer" />
+					</div>
+					<div class="component-spacer" />
+				{/if}
 			{/each}
 		</div>
 	{/if}
