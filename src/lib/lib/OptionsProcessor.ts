@@ -16,6 +16,7 @@ import {
 import type { BuilderOptions, ComponentOptions } from '$lib/Utils/types';
 import { ThemeMap } from '$lib/Utils/Misc/Theme';
 import type { FormComponentsType, FormDefinition, FormTab } from '$lib/Utils/types';
+import { DynamicImportMap } from '$lib/Utils/Misc/flavor';
 
 export class OptionsProcessor {
 	usedComponents: FormComponentsType[] = [];
@@ -93,7 +94,7 @@ export class OptionsProcessor {
 				return;
 			}
 
-			const obj = await import(/* @vite-ignore */ componentOptions.importPath);
+			const obj = await DynamicImportMap[componentName];
 
 			this.MergeComponentAttributes(componentOptions);
 
