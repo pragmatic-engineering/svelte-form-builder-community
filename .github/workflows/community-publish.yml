@@ -36,7 +36,7 @@ jobs:
           npm i
           npm run build
           cd package
-          npm version prerelease --preid=rc
+          npm version minor
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
