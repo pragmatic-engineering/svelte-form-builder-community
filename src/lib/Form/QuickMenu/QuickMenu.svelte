@@ -19,7 +19,7 @@
 <div class="menu">
 	{#if !$opts.disableDragNDropComponents}
 		<div title="Drag and Drop">
-			<Icon type="VerticalGrip" bind:size />
+			<Icon type="VerticalGrip" bind:size fill="black" />
 		</div>
 	{:else}
 		<Icon type="Empty" size="1px" />

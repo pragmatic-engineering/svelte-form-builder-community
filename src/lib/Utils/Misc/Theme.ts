@@ -119,7 +119,7 @@ export const ThemeMap: Record<ThemeType, StyleConfig> = {
 		},
 		tab: {
 			activeTabColor: '#fff',
-			activeTabBackgroundColor: '#122d42'
+			activeTabBackgroundColor: '#7e57c2cc'
 		}
 	}
 };
