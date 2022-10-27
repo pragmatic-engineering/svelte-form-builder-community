@@ -40,3 +40,10 @@ jobs:
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - name: Community Publish Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.AUTOMERGE }}
+          repository: pragmatic-engineering/svelte-form-builder-pro
+          event-type: community-publish
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "msg": "${{env.commit-msg}}"}'
