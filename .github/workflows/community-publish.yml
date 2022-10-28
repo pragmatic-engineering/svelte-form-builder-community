@@ -21,7 +21,7 @@ jobs:
         id: previoustag
         uses: oprypin/find-latest-tag@v1
         with:
-          repository: pragmatic-engineering/svelte-form-builder-pro
+          repository: pragmatic-engineering/svelte-form-builder-community
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v3
         with:
