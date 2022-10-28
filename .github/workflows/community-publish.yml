@@ -19,7 +19,10 @@ jobs:
           fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
       - name: 'Get Previous tag'
         id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        uses: oprypin/find-latest-tag@v1
+        with:
+          repository: pragmatic-engineering/svelte-form-builder-pro
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
