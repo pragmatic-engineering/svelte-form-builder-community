@@ -419,7 +419,7 @@
 				keywords: ['Text'],
 				events: {
 					onkeyup: (e: Event) => {
-						//console.log('woohoo?', e);
+						//console.log('woohooo?', e);
 					},
 					onblur: (e: Event) => {
 						//console.log('blur', e);
