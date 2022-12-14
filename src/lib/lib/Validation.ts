@@ -37,7 +37,7 @@ export function validateUserInputs() {
 			continue;
 		}
 
-		const fieldInfo = DefinitionManager.getFieldInfo(id);
+		const fieldInfo = DefinitionManager.getFieldInfo({ id: id });
 
 		//Do standard HTML validity check
 		if (
@@ -81,9 +81,13 @@ export function validateStandardHtmlAttributes(fieldInfo: FieldInfo): Validation
 	const result: ValidationError = { field: fieldInfo.field, tab: fieldInfo.tab, errors: [] };
 
 	if (fieldInfo.field.htmlAttributes.id) {
-		result.validity = (
-			document.getElementById(fieldInfo.field.htmlAttributes.id) as HTMLInputElement
-		).validity;
+		const el = document.getElementById(fieldInfo.field.htmlAttributes.id);
+		if (!el) {
+			//If element doesn't exist it may be because it is hidden/disabled due to some condition
+			return;
+		}
+
+		result.validity = (el as HTMLInputElement).validity;
 
 		if (result.validity.valueMissing) {
 			result.errors.push(getErrorMessage_Required(fieldInfo));

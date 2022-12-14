@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BuilderOptions } from '$lib/Utils/types';
+	import type { BuilderOptions, FormDefinition } from '$lib/Utils/types';
 	import {
 		opts,
 		componentSelectionPoppedOut,
@@ -8,7 +8,13 @@
 		propertyField,
 		optionsProcessorStore,
 		mainDefinition,
-		formMounted
+		formMounted,
+		numFormsMounted,
+		allFormsMounted,
+		componentInstances,
+		allFields,
+		reloadConditions,
+		conditionManager
 	} from '$lib/Utils/store';
 	import ComponentSelection from '$lib/ComponentSelection/ComponentSelection.svelte';
 	import DragImage from '$lib/Utils/MiscComponents/DragImage.svelte';
@@ -29,6 +35,10 @@
 	import DisplayContentsWrapper from '$lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
 	import Form from '$lib/Views/Form.svelte';
 	import PinnedComponentSelection from '$lib/ComponentSelection/PinnedComponentSelection.svelte';
+	import ConditionsView from '$lib/Views/Conditions.svelte';
+	import { ConditionManager } from '$lib/lib/ConditionManager';
+	import cloneDeep from 'lodash.clonedeep';
+	$numFormsMounted = 0;
 
 	export let options: Partial<BuilderOptions>;
 	OptionsProcessor.loadDefaults(options as BuilderOptions);
@@ -46,6 +56,35 @@
 
 	let showTools = false;
 	$: showToolsIcon = !$opts.disabledViews?.tools && ($view == 'build' || $view == 'preview');
+
+	$: {
+		$componentInstances = Object.fromEntries(
+			Object.entries($componentInstances).filter(
+				([k, v]) =>
+					v != null && //Remove null item(perhaps deleted manually )
+					$allFields.some((x) => x.htmlAttributes.id == k) //Ensure items have a matching Field by ID (in case id was manually changed there would be extra records)
+			)
+		);
+
+		//Sync all fields so it captures deleted items (which componentInstances will know about)
+		$allFields = $allFields.filter((x) => $componentInstances[x.htmlAttributes.id] != undefined);
+	}
+
+	let conditionLoaded = false;
+	$: {
+		if ($allFormsMounted && (!conditionLoaded || $reloadConditions)) {
+			InitConditions();
+		}
+	}
+
+	function InitConditions() {
+		$conditionManager = new ConditionManager();
+		$conditionManager.initFields();
+		conditionLoaded = true;
+		$reloadConditions = false;
+	}
+
+	let tmpDefinition: FormDefinition[] = [];
 </script>
 
 {#if !$formMounted}
@@ -79,7 +118,7 @@
 	style:background-color={$opts.styling?.root?.css?.backgroundColor ?? 'unset'}
 	style:display={$formMounted ? 'block' : 'none'}
 >
-	{#if $view == 'build' || $view == 'preview' || $view == 'settings'}
+	{#if $view == 'build' || $view == 'preview' || $view == 'settings' || $view == 'conditions'}
 		<div class="svelte-fb-main-header">
 			<Header
 				selectedValue={$view}
@@ -89,8 +128,25 @@
 						value: 'build',
 						onClick: () => {
 							$view = 'build';
-							RenderManager.applyDefaultValues();
+							//Restore definition if coming from past Preview
+							if (tmpDefinition.length > 0) {
+								$optionsProcessorStore.ReLoadDefinition({
+									formDefinition: tmpDefinition,
+									conditions: $conditionManager.conditions
+								});
+								tmpDefinition = [];
+							}
 						}
+					},
+					{
+						text: 'Conditions',
+						value: 'conditions',
+						onClick: () => {
+							$view = 'conditions';
+							$showPropertyPanel = false;
+							showTools = false;
+						},
+						hidden: $opts.disabledViews?.conditions
 					},
 					{
 						text: 'Settings',
@@ -98,6 +154,7 @@
 						onClick: () => {
 							$view = 'settings';
 							$showPropertyPanel = false;
+							showTools = false;
 						},
 						hidden: $opts.disabledViews?.settings
 					},
@@ -107,7 +164,12 @@
 						onClick: () => {
 							$view = 'preview';
 							$showPropertyPanel = false;
+
+							//Save Definition for future restore going back to Build
+							tmpDefinition = cloneDeep($mainDefinition);
+
 							RenderManager.applyDefaultValues();
+							InitConditions();
 						},
 						hidden: $opts.disabledViews?.render
 					}
@@ -132,7 +194,9 @@
 		<DisplayContentsWrapper showIf={$view != 'settings'}>
 			<div class:svelte-fb-build-layout={$view == 'build'}>
 				{#each $mainDefinition as formDefinition}
-					<DisplayContentsWrapper showIf={$opts.activeTabOrderValue == formDefinition.tab.tabOrder}>
+					<DisplayContentsWrapper
+						showIf={$opts.activeTabOrderValue == formDefinition.tab?.tabOrder}
+					>
 						<Form definition={formDefinition} />
 					</DisplayContentsWrapper>
 				{/each}
@@ -164,6 +228,12 @@
 	<DisplayContentsWrapper showIf={$view == 'settings'}>
 		<Settings />
 	</DisplayContentsWrapper>
+
+	{#if $allFormsMounted}
+		<DisplayContentsWrapper showIf={$view == 'conditions'}>
+			<ConditionsView />
+		</DisplayContentsWrapper>
+	{/if}
 </div>
 
 <style>

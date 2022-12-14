@@ -6,6 +6,7 @@
 
 	import { convertDataAttributes } from '$lib/Utils/Utils';
 	import SelectOptions from '$lib/Utils/ComponentUtilities/SelectOptions.svelte';
+	import { conditionManager } from '$lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
@@ -14,6 +15,10 @@
 	//Setup with any desired default attributes
 	const defaultAttributes: Partial<Field> = {};
 	field = { ...defaultAttributes, ...field };
+
+	export function triggerConditionChange() {
+		$conditionManager.EvaluateFieldValue(undefined, field);
+	}
 
 	export function validateUserInput(): ValidationResult {
 		if (

@@ -6,19 +6,20 @@
 	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
 	import { getErrorMessage_Required } from '$lib/lib/Validation';
 	import CheckboxRadioCommon from '$lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
+	import { conditionManager } from '$lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
 
 	export function validateUserInput(): ValidationResult {
-		const values = customUserInputSerialization();
+		const values = customGetUserData();
 		if (field.htmlAttributes?.required && (!values || !values.length)) {
 			return { field: field, errors: [getErrorMessage_Required({ field })] };
 		}
 	}
 
-	export function customUserInputSerialization() {
+	export function customGetUserData() {
 		let values: string[] = [];
 
 		//Get distinct standard values
@@ -63,8 +64,8 @@
 		}
 
 		//Check if "Other" needs to be shown & populated
-		if (customUserInputSerialization().length) {
-			customUserInputSerialization().forEach((value) => {
+		if (customGetUserData().length) {
+			customGetUserData().forEach((value) => {
 				//First one found that there is no choice-value match for, assume that is the "Other" choice
 				if (!field.choiceConfiguration?.choices?.find((x) => x.value == value)) {
 					otherValue = value;
@@ -79,6 +80,10 @@
 			});
 		}
 	});
+
+	export function triggerConditionChange() {
+		$conditionManager.EvaluateFieldValue(undefined, field);
+	}
 
 	let otherValue: string | null;
 	let isOtherChecked: boolean;

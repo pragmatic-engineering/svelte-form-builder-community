@@ -40,7 +40,14 @@ export const FormComponents = [
 ] as const;
 export type FormComponentsType = typeof FormComponents[number];
 
-export const ProComponents = ['RichText', 'Matrix', 'AutoComplete', 'Signature', 'Table'] as const;
+export type PartialFormComponents = Partial<FormComponentsType[]>;
+export const ProComponents: Readonly<PartialFormComponents> = [
+	'RichText',
+	'Matrix',
+	'AutoComplete',
+	'Signature',
+	'Table'
+] as const;
 export type ProComponentsType = typeof ProComponents[number];
 
 export interface Field {
@@ -50,6 +57,8 @@ export interface Field {
 	dataAttributes?: CustomDataAttribute[];
 	tooltipAttributes?: TooltipConfiguration;
 	defaultValue?: any;
+	prevValue?: any;
+	hidden?: boolean; //Should field be hidden?
 	labelAttributes?: FieldLabel;
 	customAttribute?: any; //User-defined for anything
 }
@@ -197,6 +206,7 @@ export interface BuilderOptions {
 	view?: views;
 	theme?: ThemeType;
 	styling?: StyleConfig;
+	conditions?: Condition[];
 }
 
 export interface StyleConfig {
@@ -262,6 +272,7 @@ interface DisabledViews {
 	settings?: boolean;
 	render?: boolean;
 	tools?: boolean;
+	conditions?: boolean;
 }
 
 interface DisabledBuildTools {
@@ -307,12 +318,21 @@ export interface ComponentImport {
 }
 
 export interface SvelteFBComponent {
+	$set(props: { show?: boolean; field?: Field }): unknown;
 	component: new (...args: any) => SvelteComponentTyped;
 	validateDefinition?: () => ValidationResult; //Validation when defining the field
 	validateUserInput?: () => ValidationResult; //Validation when using the field
-	customUserInputSerialization?: () => any; //Would be used to serialize data structures for special non-standard HTML inputs (i.e TinyMCE) for purposes of posting to the server
+	customGetUserData?: () => any; //Method to get the component user data in a custom way. It would be typically used for special non-standard HTML inputs (i.e TinyMCE) that don't use htmlAttribute.value
+	customSetUserData?: (data: any) => any; //Method to set the component user data in a custom way (if not using htmlAttribute.value)
+
 	customFormDefinitionSerialization?: () => Field; //Would be used for custom serialization for form definition
 	customReset?: () => any; //Optional. Called when resetting the form for special circumstances
+	customClear?: () => any; //Optional. Special code to clear the component value
+	triggerConditionChange?: () => any; //Optional. Tell condition manager to force evaluate the field
+	getField?: () => Field;
+
+	isEmpty?: () => boolean; //Condition override
+	isFilled?: () => boolean; //Condition override
 }
 
 export interface TableFBComponent extends SvelteFBComponent {
@@ -394,7 +414,7 @@ export interface ValidationError {
 	validity?: ValidityState;
 }
 
-export type views = 'build' | 'settings' | 'render' | 'preview';
+export type views = 'build' | 'settings' | 'render' | 'preview' | 'conditions';
 
 export interface SerializeResult {
 	name: string;
@@ -415,4 +435,112 @@ export interface FileUploadSerialization {
 	size: number;
 	type: string;
 	base64: string;
+}
+
+export interface GroupItemField {
+	groupHeader: string;
+	items: GroupItem[];
+}
+
+export interface GroupItem {
+	value: string | number;
+	text: string;
+}
+
+//                              Conditions
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+//***************************************************************************************/
+export interface Condition {
+	id: string;
+	disabled?: boolean;
+	priority: number;
+	matchOn: ConditionMatchOn;
+	terms: ConditionTerm[];
+	actions: ConditionAction[];
+	isActivated?: boolean;
+}
+
+export enum ConditionMatchOn {
+	Any = 0,
+	All = 1
+}
+
+export interface ConditionTerm {
+	id: string;
+	fieldName: string;
+	field?: Field;
+	termOperator: TermOperator;
+	value?: string;
+	targetFieldName?: string;
+	valueType?: TargetOption | undefined;
+}
+
+export enum TargetOption {
+	Value = 0,
+	PreDefinedValue = 1,
+	OtherField = 2
+}
+export enum TermOperator {
+	Equals = 0,
+	NotEquals = 1,
+	StartsWith = 2,
+	NotStartsWith = 3,
+	EndsWith = 4,
+	NotEndsWith = 5,
+	GreaterThan = 6,
+	LessThan = 7,
+	Before = 8,
+	After = 9,
+	IsFilled = 10,
+	IsEmpty = 11,
+	DoesNotContain = 12,
+	Contains = 13
+}
+
+export interface ConditionAction {
+	id: string;
+	action: ConditionActionOption;
+	objectNames?: string[];
+	isActivated?: boolean;
+	message?: ConditionActionMessageInfo;
+	equation?: string;
+	decimalPlaces?: number;
+	targetObjectName?: string; //Used to specify another object name (like for Copy or Calculation action)
+}
+
+export interface ConditionActionMessageInfo {
+	text: string;
+	duration?: number;
+	type?: 'success' | 'info' | 'error' | 'warning';
+	color?: string;
+	barColor?: string;
+	backgroundColor?: string;
+}
+
+export enum ConditionActionOption {
+	None = 0,
+	Show = 1,
+	Hide = 2,
+	Require = 3,
+	UnRequire = 4,
+	Enable = 5,
+	Disable = 6,
+	ShowTab = 7,
+	HideTab = 8,
+	ActivateTab = 9,
+	SkipToField = 10,
+	ShowMessage = 11,
+	Clear = 12,
+	Copy = 13,
+	Calculation = 14
 }

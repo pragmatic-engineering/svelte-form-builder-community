@@ -1,4 +1,11 @@
-import { componentsLoaded, importedComponents, mainDefinition, opts, view } from '$lib/Utils/store';
+import {
+	componentsLoaded,
+	importedComponents,
+	mainDefinition,
+	opts,
+	reloadConditions,
+	view
+} from '$lib/Utils/store';
 import { get } from 'svelte/store';
 import { TabManager } from '$lib/Tabs/TabManager';
 import merge from 'lodash.merge';
@@ -16,7 +23,7 @@ import {
 import type { BuilderOptions, ComponentOptions } from '$lib/Utils/types';
 import { ThemeMap } from '$lib/Utils/Misc/Theme';
 import type { FormComponentsType, FormDefinition, FormTab } from '$lib/Utils/types';
-import { DynamicImportMap } from '$lib/Utils/Misc/flavor';
+import { DynamicImportMap, flavor } from '$lib/Utils/Misc/flavor';
 
 export class OptionsProcessor {
 	usedComponents: FormComponentsType[] = [];
@@ -45,6 +52,13 @@ export class OptionsProcessor {
 
 		if (!options.formDefinition) {
 			options.formDefinition = [];
+		}
+
+		if (flavor != 'enterprise') {
+			if (!options.disabledViews) {
+				options.disabledViews = {};
+			}
+			options.disabledViews.conditions = true;
 		}
 
 		//options = Object.assign({}, defaults, options);
@@ -238,8 +252,13 @@ export class OptionsProcessor {
 		mainDefinition.set(this.opts.formDefinition);
 	}
 
-	public async ReLoadDefinition(definition: FormDefinition[]) {
-		get(opts).formDefinition = definition;
+	public async ReLoadDefinition(definition: BuilderOptions) {
+		get(opts).formDefinition = definition.formDefinition;
+		get(opts).conditions = definition.conditions;
+		if (definition.conditions) {
+			reloadConditions.set(true);
+		}
+
 		await this.ProcessFormDefinition();
 	}
 

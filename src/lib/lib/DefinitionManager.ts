@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import {
 	componentInstances,
+	conditionManager,
 	importedComponents,
 	mainDefinition,
 	optionsProcessorStore,
@@ -9,9 +10,10 @@ import {
 import { get } from 'svelte/store';
 import merge from 'lodash.merge';
 import { TabManager } from '$lib/Tabs/TabManager';
-import type { FieldInfo } from '$lib/Utils/types';
+import type { BuilderOptions, FieldInfo } from '$lib/Utils/types';
 import type { Field, FormDefinition, FormTab } from '$lib/Utils/types';
 import type { ComponentImport, FieldGroup, SvelteFBComponent } from '$lib/Utils/types';
+import type { HTMLAttributes } from '$lib/Utils/other-types/svelte-types';
 
 export class DefinitionManager {
 	static getFieldComponent(field: Field) {
@@ -21,7 +23,7 @@ export class DefinitionManager {
 	}
 
 	static getData(space: number | string | undefined = 2) {
-		let result = '';
+		const result: Partial<BuilderOptions> = {};
 
 		const customFieldMap = new Map<string, Field>();
 
@@ -53,13 +55,28 @@ export class DefinitionManager {
 				}
 			}
 
-			result = JSON.stringify(tmp, undefined, space);
+			result.formDefinition = tmp;
 		} else {
 			//Normal return
-			result = JSON.stringify(get(mainDefinition), undefined, space);
+			result.formDefinition = get(mainDefinition);
 		}
 
-		return result;
+		//Wipe out the field property before returning conditions
+		const tmpConditons = get(conditionManager).conditions;
+		for (const condition of tmpConditons) {
+			for (const term of condition.terms) {
+				for (const key in term) {
+					if (Object.prototype.hasOwnProperty.call(term, key)) {
+						if (key == 'field') {
+							delete term[key];
+						}
+					}
+				}
+			}
+		}
+		result.conditions = tmpConditons;
+
+		return JSON.stringify(result, undefined, space);
 	}
 
 	public static processField(field: Field) {
@@ -256,7 +273,7 @@ export class DefinitionManager {
 					if (i == 0) {
 						//First field from the group will give back tab/row data for the subsequent fields
 						const addedField = await this.addFieldToTab(tabID, fieldToAdd);
-						firstFieldInfo = this.getFieldInfo(addedField.htmlAttributes.id as string);
+						firstFieldInfo = this.getFieldInfo({ id: addedField.htmlAttributes.id });
 						fields.push(addedField);
 					} else {
 						const addedField = await this.addFieldToTab(tabID, fieldToAdd, firstFieldInfo?.row, i);
@@ -332,7 +349,9 @@ export class DefinitionManager {
 		return definition.rows.find((x) => x.rowID == rowID)?.fields;
 	}
 
-	public static getFieldInfo(id: string): FieldInfo | undefined {
+	public static getFieldInfo(
+		queryHtmlAttributes: HTMLAttributes<HTMLElement>
+	): FieldInfo | undefined {
 		const definitions = get(mainDefinition);
 		const result = {} as FieldInfo;
 
@@ -347,13 +366,18 @@ export class DefinitionManager {
 				}
 
 				row.fields.forEach((field, fieldIndex) => {
-					if (field.htmlAttributes.id == id) {
-						result.field = field;
-						result.row = rowIndex;
-						result.fieldIndex = fieldIndex;
-						result.tab = definition.tab as FormTab;
-						result.componentImport = this.getFieldComponent(result.field);
-						return;
+					if (queryHtmlAttributes.id || queryHtmlAttributes.name) {
+						if (
+							field.htmlAttributes.id == queryHtmlAttributes.id ||
+							field.htmlAttributes.name == queryHtmlAttributes.name
+						) {
+							result.field = field;
+							result.row = rowIndex;
+							result.fieldIndex = fieldIndex;
+							result.tab = definition.tab as FormTab;
+							result.componentImport = this.getFieldComponent(result.field);
+							return;
+						}
 					}
 				});
 			});
@@ -402,7 +426,7 @@ export class DefinitionManager {
 					continue;
 				}
 
-				const fieldInfo = DefinitionManager.getFieldInfo(id);
+				const fieldInfo = DefinitionManager.getFieldInfo({ id: id });
 				if (fieldInfo) {
 					callback(fieldInfo, componentInstance);
 				}

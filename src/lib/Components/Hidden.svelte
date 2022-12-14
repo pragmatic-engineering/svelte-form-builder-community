@@ -4,7 +4,7 @@
 	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
 	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 
-	import { view } from '$lib/Utils/store';
+	import { conditionManager, view } from '$lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
@@ -29,6 +29,7 @@
 			on:pointerleave
 			on:pointerenter
 			bind:value={field.htmlAttributes.value}
+			on:change={(e) => $conditionManager.EvaluateFieldValue(e, field)}
 			on:change={componentOptions?.events?.onchange}
 			on:input={componentOptions?.events?.oninput}
 			on:blur={componentOptions?.events?.onblur}
@@ -44,6 +45,7 @@
 			type="hidden"
 			use:init
 			bind:value={field.htmlAttributes.value}
+			on:change={(e) => $conditionManager.EvaluateFieldValue(e, field)}
 			on:change={componentOptions?.events?.onchange}
 			on:input={componentOptions?.events?.oninput}
 			on:blur={componentOptions?.events?.onblur}
