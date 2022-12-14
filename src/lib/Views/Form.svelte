@@ -11,7 +11,9 @@
 		componentInstances,
 		isComponentDragging,
 		rendering,
-		formMounted
+		formMounted,
+		numFormsMounted,
+		allFields
 	} from '$lib/Utils/store';
 	import LeftRightDropTarget from '$lib/Form/DragNDrop/LeftRight.svelte';
 	import TopBottomDropTarget from '$lib/Form/DragNDrop/TopBottom.svelte';
@@ -27,6 +29,7 @@
 			$opts.builderAPIEvents?.onFormMounted.call(undefined, definition);
 		}
 		$formMounted = true;
+		$numFormsMounted += 1;
 	});
 
 	export let definition: FormDefinition;
@@ -45,6 +48,9 @@
 	function syncDefaultValue(field: Field) {
 		if ($view == 'build') {
 			field.defaultValue = field.htmlAttributes.value;
+		}
+		if (!$allFields.includes(field)) {
+			$allFields.push(field);
 		}
 	}
 

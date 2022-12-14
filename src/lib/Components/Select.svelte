@@ -6,6 +6,7 @@
 
 	import { convertDataAttributes } from '$lib/Utils/Utils';
 	import SelectOptions from '$lib/Utils/ComponentUtilities/SelectOptions.svelte';
+	import { conditionManager } from '$lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
@@ -14,6 +15,10 @@
 	//Setup with any desired default attributes
 	const defaultAttributes: Partial<Field> = {};
 	field = { ...defaultAttributes, ...field };
+
+	export function triggerConditionChange() {
+		$conditionManager.EvaluateFieldValue(undefined, field);
+	}
 
 	export function validateUserInput(): ValidationResult {
 		if (
@@ -25,7 +30,7 @@
 	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	{#if field.htmlAttributes.multiple}
@@ -36,6 +41,7 @@
 			multiple
 			on:pointerleave
 			on:pointerenter
+			on:change={triggerConditionChange}
 			on:change={componentOptions?.events?.onchange}
 			on:input={componentOptions?.events?.oninput}
 			on:blur={componentOptions?.events?.onblur}
@@ -53,6 +59,7 @@
 			bind:value={field.htmlAttributes.value}
 			on:pointerleave
 			on:pointerenter
+			on:change={triggerConditionChange}
 			on:change={componentOptions?.events?.onchange}
 			on:input={componentOptions?.events?.oninput}
 			on:blur={componentOptions?.events?.onblur}

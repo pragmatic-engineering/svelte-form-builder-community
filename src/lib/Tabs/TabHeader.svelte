@@ -26,7 +26,7 @@
 	let pointerOverTab: FormTab | undefined;
 </script>
 
-{#if $view != 'settings'}
+{#if $view != 'settings' && $view != 'conditions'}
 	<ul>
 		{#each $mainDefinition as formDefinition}
 			{#if formDefinition.tab}

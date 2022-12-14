@@ -1,6 +1,6 @@
 import type { FormComponentsType } from '$lib/Utils/types';
 
-export const flavor: 'community' | 'pro' = 'community';
+export const flavor: 'community' | 'pro' | 'enterprise' = 'community';
 
 export const DynamicImportMap: Partial<Record<FormComponentsType, Promise<any>>> = {
 	Button: import(`../../Components/Button.svelte`),

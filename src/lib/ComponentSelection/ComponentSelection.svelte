@@ -30,7 +30,7 @@
 	let dragHandle: HTMLDivElement = {} as HTMLDivElement;
 	const storage_lastSelectedCategory = 'lastSelectedCategory';
 	const storage_starredComponents: string = 'starredComponents';
-	const storage_componentSelectionMinimized = 'componentSelectionMinimuzed';
+	const storage_componentSelectionMinimized = 'componentSelectionMinimized';
 
 	let isMinimized = JSON.parse(localStorage.getItem(storage_componentSelectionMinimized) as string);
 

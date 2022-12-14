@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { DefinitionManager } from '$lib/lib/DefinitionManager';
 	import { optionsProcessorStore, opts } from '$lib/Utils/store';
-	import type { FormDefinition } from '$lib/Utils/types';
+	import type { BuilderOptions } from '$lib/Utils/types';
 	import { CScope } from '$lib/Utils/Utils';
 	import { validateDefinitions } from '$lib/lib/Validation';
 	import { TabManager } from '$lib/Tabs/TabManager';
@@ -51,7 +51,7 @@
 	async function readFiles() {
 		for (let index = 0; index < files.length; index++) {
 			const file = files[index];
-			const definition: FormDefinition[] = JSON.parse(await file.text());
+			const definition: BuilderOptions = JSON.parse(await file.text());
 			await $optionsProcessorStore.ReLoadDefinition(definition);
 			files = [] as unknown as FileList;
 		}

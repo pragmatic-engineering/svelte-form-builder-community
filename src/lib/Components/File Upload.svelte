@@ -3,14 +3,16 @@
 	import { convertDataAttributes } from '$lib/Utils/Utils';
 	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import { conditionManager } from '$lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
 
 	let files: FileList;
+	let input: HTMLInputElement;
 
-	export async function customUserInputSerialization() {
+	export async function customGetUserData() {
 		let results: FileUploadSerialization[] = [];
 
 		if (files) {
@@ -43,9 +45,13 @@
 			reader.onerror = (error) => reject(error);
 		});
 	}
+
+	export function customClear() {
+		input.value = '';
+	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<input
@@ -53,9 +59,13 @@
 		{...convertDataAttributes(field.dataAttributes)}
 		type="file"
 		bind:files
+		bind:this={input}
 		on:pointerleave
 		on:pointerenter
 		on:invalid
+		on:change={async (e) => {
+			$conditionManager.EvaluateFieldValue(e, field, await customGetUserData());
+		}}
 		on:change={componentOptions?.events?.onchange}
 		on:input={componentOptions?.events?.oninput}
 		on:blur={componentOptions?.events?.onblur}

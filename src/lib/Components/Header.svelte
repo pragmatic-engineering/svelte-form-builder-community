@@ -10,7 +10,7 @@
 	$: flavor = field.dataAttributes?.find((x) => x.name == 'flavor')?.value;
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	{@const elementType = typeof flavor === 'string' ? flavor : 'h1'}
 	<div on:pointerleave on:pointerenter>
 		<svelte:element

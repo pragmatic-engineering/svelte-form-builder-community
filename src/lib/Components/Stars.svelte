@@ -1,18 +1,5 @@
-<!-- https://github.com/ErnaneJ/svelte-star-rating -->
-<script lang="ts">
-	import StarRating from '@ernane/svelte-star-rating';
-
-	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
-
-	import { getErrorMessage_Required } from '$lib/lib/Validation';
-
-	export let field: Field;
-	export let componentOptions: ComponentOptions;
-	export let tab: FormTab;
-
-	interface StarConfig {
+<script lang="ts" context="module">
+	export interface StarsConfig {
 		readOnly?: boolean | undefined | null;
 		countStars: number;
 		range: {
@@ -22,14 +9,33 @@
 		};
 		score: number;
 		showScore?: boolean;
-		starConfig: {
-			size?: number;
-			fillColor?: string;
-			strokeColor?: string;
-		};
+		starConfig: StarConfig;
 	}
 
-	let config: StarConfig = {
+	export interface StarConfig {
+		size?: number;
+		fillColor?: string;
+		strokeColor?: string;
+	}
+</script>
+
+<!-- https://github.com/ErnaneJ/svelte-star-rating -->
+<script lang="ts">
+	// import StarRating from '@ernane/svelte-star-rating';
+	import StarRating from '$lib/Utils/MiscComponents/StarFork/StarRating2.svelte';
+
+	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
+	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+
+	import { getErrorMessage_Required } from '$lib/lib/Validation';
+	import { conditionManager } from '$lib/Utils/store';
+
+	export let field: Field;
+	export let componentOptions: ComponentOptions;
+	export let tab: FormTab;
+
+	let config: StarsConfig = {
 		starConfig: {},
 		range: {},
 		score: 0,
@@ -84,25 +90,33 @@
 		}
 	}
 
-	export function customUserInputSerialization() {
-		return { numStars: config.score, percentage: (config.score / config.countStars) * 100 };
+	export function customGetUserData() {
+		return config.score;
 	}
 
 	export function validateUserInput(): ValidationResult {
-		field.htmlAttributes.value = customUserInputSerialization();
+		field.htmlAttributes.value = customGetUserData();
 
 		if (field.htmlAttributes?.required && !field.htmlAttributes.value.numStars) {
 			return { field: field, errors: [getErrorMessage_Required({ field })] };
 		}
 	}
+
+	export function triggerConditionChange() {
+		$conditionManager.EvaluateFieldValue && $conditionManager.EvaluateFieldValue(undefined, field);
+	}
+
+	export function customClear() {
+		config.score = null;
+	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<div on:pointerleave on:pointerenter>
 		{#if config}
-			<StarRating bind:config />
+			<StarRating bind:config on:change={triggerConditionChange} />
 		{/if}
 	</div>
 </GroupSlot>

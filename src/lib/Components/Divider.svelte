@@ -18,7 +18,7 @@
 	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<div
 		style:height
 		{...field.htmlAttributes}
