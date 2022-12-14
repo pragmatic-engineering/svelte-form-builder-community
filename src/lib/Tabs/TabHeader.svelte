@@ -5,20 +5,8 @@
 	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
 	import TabProperties from '$lib/Tabs/TabPropertyPanel.svelte';
 	import TabQuickMenu from '$lib/Tabs/QuickMenu.svelte';
-	import { convertDataAttributes } from '$lib/Utils/Utils';
+	import { convertDataAttributes, LibraryPrefix } from '$lib/Utils/Utils';
 	import { TabManager } from '$lib/Tabs/TabManager';
-
-	function handleTabClick(tabOrder: number | undefined) {
-		if ($opts.activeTabOrderValue == tabOrder) {
-			return;
-		}
-
-		$opts.activeTabOrderValue = tabOrder;
-
-		if ($opts.builderAPIEvents?.onTabChanged) {
-			$opts.builderAPIEvents?.onTabChanged?.call(undefined, TabManager.getActiveTabDefinition());
-		}
-	}
 
 	let DnD = new DragNDropTabs();
 
@@ -31,6 +19,7 @@
 		{#each $mainDefinition as formDefinition}
 			{#if formDefinition.tab}
 				<li
+					id="{LibraryPrefix}-tab-{formDefinition.tab.label}"
 					{...convertDataAttributes(formDefinition.tab.dataAttributes)}
 					on:dragstart={(e) => $view == 'build' && DnD.tabDragStart(e, formDefinition.tab)}
 					on:dragover={(e) => $view == 'build' && DnD.tabDragOver(e, formDefinition.tab)}
@@ -39,7 +28,8 @@
 					class={$opts.activeTabOrderValue === formDefinition.tab.tabOrder ? 'active' : ''}
 				>
 					<span
-						on:click={() => handleTabClick(formDefinition.tab && formDefinition.tab.tabOrder)}
+						on:click={() =>
+							TabManager.activateTab(formDefinition.tab && formDefinition.tab.tabOrder)}
 						on:pointerover={() => {
 							isPointerOverTabHeader = true;
 							pointerOverTab = formDefinition.tab;

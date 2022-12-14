@@ -438,4 +438,16 @@ export class DefinitionManager {
 		const instances = get(componentInstances);
 		return instances[field.htmlAttributes.id as string];
 	}
+
+	public static getDefinitionByField(field: Field) {
+		const definitions = get(mainDefinition);
+
+		for (const definition of definitions) {
+			for (const rows of definition.rows) {
+				if (rows.fields.includes(field)) {
+					return definition;
+				}
+			}
+		}
+	}
 }
