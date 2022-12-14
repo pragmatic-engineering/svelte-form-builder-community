@@ -68,7 +68,7 @@
 	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<span
@@ -89,6 +89,7 @@
 						bind:group={field.htmlAttributes.value}
 						value={choice.value}
 						on:invalid
+						on:change={triggerConditionChange}
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}
 						on:blur={componentOptions?.events?.onblur}
@@ -112,6 +113,7 @@
 						bind:group={field.htmlAttributes.value}
 						value={otherValValue}
 						on:invalid
+						on:change={triggerConditionChange}
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}
 						on:blur={componentOptions?.events?.onblur}
@@ -125,6 +127,7 @@
 						class="other-val"
 						type="text"
 						bind:value={otherValue}
+						on:change={triggerConditionChange}
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}
 						on:blur={componentOptions?.events?.onblur}

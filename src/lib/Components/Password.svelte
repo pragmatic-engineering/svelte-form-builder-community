@@ -10,7 +10,7 @@
 	export let tab: FormTab;
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<input

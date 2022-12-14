@@ -94,7 +94,7 @@
 	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<span
@@ -117,6 +117,7 @@
 						on:invalid
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}
+						on:change={triggerConditionChange}
 						on:blur={componentOptions?.events?.onblur}
 						on:focus={componentOptions?.events?.onfocus}
 						on:keyup={componentOptions?.events?.onkeyup}
@@ -139,6 +140,7 @@
 						on:invalid
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}
+						on:change={triggerConditionChange}
 						on:blur={componentOptions?.events?.onblur}
 						on:focus={componentOptions?.events?.onfocus}
 						on:invalid={componentOptions?.events?.oninvalid}
@@ -152,6 +154,7 @@
 						bind:value={otherValue}
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}
+						on:change={triggerConditionChange}
 						on:blur={componentOptions?.events?.onblur}
 						on:focus={componentOptions?.events?.onfocus}
 						on:keyup={componentOptions?.events?.onkeyup}

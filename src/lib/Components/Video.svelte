@@ -9,7 +9,7 @@
 	export let tab: FormTab;
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<!-- svelte-ignore a11y-media-has-caption -->

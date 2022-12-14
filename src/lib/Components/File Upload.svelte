@@ -10,6 +10,7 @@
 	export let tab: FormTab;
 
 	let files: FileList;
+	let input: HTMLInputElement;
 
 	export async function customGetUserData() {
 		let results: FileUploadSerialization[] = [];
@@ -44,9 +45,13 @@
 			reader.onerror = (error) => reject(error);
 		});
 	}
+
+	export function customClear() {
+		input.value = '';
+	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<input
@@ -54,6 +59,7 @@
 		{...convertDataAttributes(field.dataAttributes)}
 		type="file"
 		bind:files
+		bind:this={input}
 		on:pointerleave
 		on:pointerenter
 		on:invalid

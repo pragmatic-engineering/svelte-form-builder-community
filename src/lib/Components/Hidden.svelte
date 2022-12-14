@@ -18,7 +18,7 @@
 	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	{#if $view == 'build'}
 		<ComponentLabel {field} />
 

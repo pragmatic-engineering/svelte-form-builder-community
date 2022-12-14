@@ -9,7 +9,7 @@
 	export let tab: FormTab;
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<div class="wrapper" on:pointerleave on:pointerenter>

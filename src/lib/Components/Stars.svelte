@@ -111,7 +111,7 @@
 	}
 </script>
 
-<GroupSlot>
+<GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<div on:pointerleave on:pointerenter>
