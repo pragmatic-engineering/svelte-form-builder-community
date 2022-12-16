@@ -55,7 +55,22 @@ Svelte Form Builder is a No-Code/Low-Code Drag and Drop Form Builder Library bui
 - Video
 - Week
 
+## Sponsorship
+
+A <b>one-time</b> sponsorship will provide access to either the <b>Pro</b> or <b>Enterprise</b> tiers.
+
+[Become a sponsor to <b>Svelte Form Builder</b>](https://github.com/sponsors/pragmatic-engineering?frequency=one-time)
+
+Currently, Svelte Form Builder is a team of 1, funded by the GitHub sponsors community.
+
+🙏 If you use use this library, sponsorship would mean A WHOLE LOT to allow continued development into the project and community surrounding it 💗.
+
+GitHub Sponsorship will automatically provide access to the private repo & package.
+
 ### 5 Premium Components (Pro)
+
+[The Individual](https://github.com/sponsors/pragmatic-engineering/sponsorships?&tier_id=221885&preview=false) or
+[The Team](https://github.com/sponsors/pragmatic-engineering/sponsorships?&tier_id=231078&preview=false)
 
 - AutoComplete
 - Matrix
@@ -63,7 +78,9 @@ Svelte Form Builder is a No-Code/Low-Code Drag and Drop Form Builder Library bui
 - Signature Pad
 - Table
 
-#### Condition Management (Enterprise)
+### Condition Management (Enterprise)
+
+[The Enterprise](https://github.com/sponsors/pragmatic-engineering/sponsorships?&tier_id=221891&preview=false)
 
 Robust condition management module based off of Terms & Actions
 
