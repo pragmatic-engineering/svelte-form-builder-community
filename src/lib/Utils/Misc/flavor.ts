@@ -8,7 +8,7 @@ export const DynamicImportMap: Partial<Record<FormComponentsType, Promise<any>>>
 	Select: import(`../../Components/Select.svelte`),
 	Number: import(`../../Components/Number.svelte`),
 	Hidden: import(`../../Components/Hidden.svelte`),
-	'Text Area': import(`../../Components/Text.svelte`),
+	'Text Area': import(`../../Components/Text Area.svelte`),
 	'Checkbox Group': import(`../../Components/Checkbox Group.svelte`),
 	'Radio Group': import(`../../Components/Radio Group.svelte`),
 	Date: import(`../../Components/Date.svelte`),
