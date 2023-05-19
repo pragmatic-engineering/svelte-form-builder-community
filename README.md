@@ -55,6 +55,8 @@ Svelte Form Builder is a No-Code/Low-Code Drag and Drop Form Builder Library bui
 - Video
 - Week
 
+Community License: [GPL-3.0 license](../license/gpl3)
+
 ## Sponsorship
 
 A <b>one-time</b> sponsorship will provide access to either the <b>Pro</b> or <b>Enterprise</b> tiers.
@@ -66,6 +68,8 @@ Currently, Svelte Form Builder is a team of 1, funded by the GitHub sponsors com
 🙏 If you use use this library, sponsorship would mean A WHOLE LOT to allow continued development into the project and community surrounding it 💗.
 
 GitHub Sponsorship will automatically provide access to the private repo & package.
+
+Additionally, the Pro & Enterprise tiers also come with a more flexible [Commercial EULA License](../license/commercial)
 
 ### 5 Premium Components (Pro)
 
@@ -121,3 +125,7 @@ Once the Terms are met, then the actions kick in. This can then work in tandem w
 - Clear
 - Copy
 - Calculation
+
+## Support
+
+Different customers have varying preferences and needs when it comes to support, so several options are made available, see [Support Options](https://svelte-form-builder-docs.vercel.app/en/intro/install#support)
