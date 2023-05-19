@@ -69,7 +69,7 @@ Currently, Svelte Form Builder is a team of 1, funded by the GitHub sponsors com
 
 GitHub Sponsorship will automatically provide access to the private repo & package.
 
-Additionally, the Pro & Enterprise tiers also come with a more flexible [Commercial EULA License](../license/commercial)
+Additionally, the Pro & Enterprise tiers also come with a more flexible [Commercial EULA License](https://svelte-form-builder-docs.vercel.app/en/license/commercial)
 
 ### 5 Premium Components (Pro)
 
