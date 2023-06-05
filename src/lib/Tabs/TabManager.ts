@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { mainDefinition, opts } from '$lib/Utils/store';
-import type { FormDefinition, FormTab, BuilderOptions, Field } from '$lib/Utils/types';
+import type { FormDefinition, FormTab, BuilderOptions } from '$lib/Utils/types';
 import { LibraryPrefix } from '$lib/Utils/Utils';
 
 export class TabManager {
