@@ -17,4 +17,4 @@ jobs:
       packages: write
     steps:
       - name: Run a one-line script
-        run: echo ${{env.commit-msg}}
+        run: echo asdf
