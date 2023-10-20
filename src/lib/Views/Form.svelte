@@ -78,7 +78,7 @@
 </script>
 
 {#if $view == 'build' || $rendering}
-	<div in:fade style="flex-grow: 2;">
+	<div in:fade|global style="flex-grow: 2;">
 		{#if rows.length > 0}
 			{#each [...rows] as row, rowIndex}
 				<!-- Top Dropzone -->
@@ -90,7 +90,7 @@
 					<div
 						class={CScope('row')}
 						id={row.rowID.toString()}
-						in:fade|local
+						in:fade
 						style:justify-content={justifyContent}
 					>
 						{#each row.fields as field, fieldIndex (field.htmlAttributes.id)}
@@ -106,7 +106,7 @@
 
 								<!-- Component Wrapper -->
 								<div
-									in:fade|local
+									in:fade
 									class="{CScope('control')} col"
 									style:justify-content={justifyContent}
 									draggable={$view == 'build' &&

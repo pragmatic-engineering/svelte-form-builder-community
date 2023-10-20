@@ -1,5 +1,5 @@
+import { animateScroll } from '$lib/Utils/MiscComponents/ScrollToElementFork/service';
 import type { CustomDataAttribute, Field } from '$lib/Utils/types';
-import { animateScroll } from 'svelte-scrollto-element';
 
 export function capitalizeFirstLetter(string: string) {
 	return string[0].toUpperCase() + string.slice(1);

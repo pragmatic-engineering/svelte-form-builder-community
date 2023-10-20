@@ -49,7 +49,7 @@
 
 <div
 	bind:this={dropzone}
-	in:fade={{ duration: 900 }}
+	in:fade|global={{ duration: 900 }}
 	draggable={false}
 	on:dragleave={(e) => dragLeave(e)}
 	on:dragenter={(e) => dragEnter(e)}

@@ -460,8 +460,8 @@
 			{#each filteredComponents as item}
 				{#if item}
 					<div
-						in:slide={{ duration: 400 }}
-						out:slide|local={{ duration: 400 }}
+						in:slide|global={{ duration: 400 }}
+						out:slide={{ duration: 400 }}
 						class="component-selection"
 						on:dragstart={(e) => DragNDrop.onComponentSelectionDragStart(e, item.componentName)}
 						on:dragend={(e) => DragNDrop.onComponentSelectionDragEnd(e, item.componentName)}

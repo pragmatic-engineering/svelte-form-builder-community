@@ -39,7 +39,7 @@
 </script>
 
 <StyledSidePanel>
-	<div in:fly={{ x: 200, duration: 700 }} out:fade={{ duration: 300 }}>
+	<div in:fly|global={{ x: 200, duration: 700 }} out:fade|global={{ duration: 300 }}>
 		<div
 			class="propertyPanelHeader"
 			style:background={$opts.styling?.propertyPanel?.propertyPanelHeaderBackground}
