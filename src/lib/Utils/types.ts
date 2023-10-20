@@ -171,7 +171,7 @@ export interface FormTab {
 //***************************************************************************************/
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { SvelteComponentTyped } from 'svelte';
+import type { SvelteComponent } from 'svelte';
 import type { DOMAttributes } from '$lib/Utils/other-types/svelte-types';
 import type { ColumnComponent } from 'tabulator-tables';
 import type { ThemeType } from '$lib/Utils/Misc/Theme';
@@ -319,7 +319,7 @@ export interface ComponentImport {
 
 export interface SvelteFBComponent {
 	$set(props: { show?: boolean; field?: Field }): unknown;
-	component: new (...args: any) => SvelteComponentTyped;
+	component: new (...args: any) => SvelteComponent;
 	validateDefinition?: () => ValidationResult; //Validation when defining the field
 	validateUserInput?: () => ValidationResult; //Validation when using the field
 	customGetUserData?: () => any; //Method to get the component user data in a custom way. It would be typically used for special non-standard HTML inputs (i.e TinyMCE) that don't use htmlAttribute.value

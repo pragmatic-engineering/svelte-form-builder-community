@@ -19,7 +19,7 @@
 </script>
 
 {#if !field || !field.hidden}
-	<!-- <div in:fadePlus={{}}> -->
+	<!-- <div in:fadePlus|global={{}}> -->
 	<div>
 		<div class="group">
 			<slot />

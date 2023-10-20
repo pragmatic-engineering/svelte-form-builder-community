@@ -42,7 +42,7 @@
 
 <div
 	bind:this={dropzone}
-	in:scale={{ duration: 850 }}
+	in:scale|global={{ duration: 850 }}
 	draggable={false}
 	on:dragleave={(e) => dragLeave(e)}
 	on:dragenter={(e) => dragEnter(e)}
