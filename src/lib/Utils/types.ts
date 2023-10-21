@@ -38,7 +38,7 @@ export const FormComponents = [
 	'Table',
 	'Stars'
 ] as const;
-export type FormComponentsType = typeof FormComponents[number];
+export type FormComponentsType = (typeof FormComponents)[number];
 
 export type PartialFormComponents = Partial<FormComponentsType[]>;
 export const ProComponents: Readonly<PartialFormComponents> = [
@@ -48,7 +48,7 @@ export const ProComponents: Readonly<PartialFormComponents> = [
 	'Signature',
 	'Table'
 ] as const;
-export type ProComponentsType = typeof ProComponents[number];
+export type ProComponentsType = (typeof ProComponents)[number];
 
 export interface Field {
 	componentName: FormComponentsType;
@@ -72,7 +72,7 @@ export interface FieldLabel {
 export interface TooltipConfiguration {
 	text?: string;
 	position?: TooltipPositionType;
-	size?: TooltipPositionType;
+	size?: TooltipSizeType;
 }
 
 export const TooltipPosition = [
@@ -85,10 +85,10 @@ export const TooltipPosition = [
 	'down-left',
 	'down-right'
 ] as const;
-export type TooltipPositionType = typeof TooltipPosition[number];
+export type TooltipPositionType = (typeof TooltipPosition)[number];
 
 export const TooltipSize = ['large', 'small', 'medium', 'xlarge', 'fit'] as const;
-export type TooltipSizeType = typeof TooltipSize[number];
+export type TooltipSizeType = (typeof TooltipSize)[number];
 
 export interface ChoiceConfiguration {
 	initialBlankChoice?: boolean; //Select
@@ -111,19 +111,19 @@ export interface ChoiceConfiguration {
 export type ChoiceElement = Partial<HTMLOptionElement>;
 
 export const ChoiceShapeStyle = ['square', 'curve', 'round'] as const;
-export type ChoiceShapeStyleType = typeof ChoiceShapeStyle[number];
+export type ChoiceShapeStyleType = (typeof ChoiceShapeStyle)[number];
 
 export const ChoiceSwitchStyle = ['outline', 'fill', 'slim'] as const;
-export type ChoiceSwitchStyleType = typeof ChoiceSwitchStyle[number];
+export type ChoiceSwitchStyleType = (typeof ChoiceSwitchStyle)[number];
 
 export const ChoiceFillStyle = ['fill', 'thick'] as const;
-export type ChoiceFillStyleType = typeof ChoiceFillStyle[number];
+export type ChoiceFillStyleType = (typeof ChoiceFillStyle)[number];
 
 export const ChoiceAnimationStyle = ['smooth', 'pulse', 'tada', 'jelly', 'rotate'] as const;
-export type ChoiceAnimationStyleType = typeof ChoiceAnimationStyle[number];
+export type ChoiceAnimationStyleType = (typeof ChoiceAnimationStyle)[number];
 
 export const ChoiceColorStyle = ['primary', 'success', 'warning', 'info', 'danger'] as const;
-export type ChoiceColorType = typeof ChoiceColorStyle[number];
+export type ChoiceColorType = (typeof ChoiceColorStyle)[number];
 
 export interface CustomDataAttribute {
 	label?: string; //If no label is specified, it will not be shown in the property editor
