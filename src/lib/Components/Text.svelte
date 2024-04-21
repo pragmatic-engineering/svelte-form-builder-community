@@ -14,9 +14,9 @@
 	<ComponentLabel {field} />
 
 	<input
+		type="text"
 		{...field.htmlAttributes}
 		{...convertDataAttributes(field.dataAttributes)}
-		type="text"
 		bind:value={field.htmlAttributes.value}
 		on:pointerleave
 		on:pointerenter
