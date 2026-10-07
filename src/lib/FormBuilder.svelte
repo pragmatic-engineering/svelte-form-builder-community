@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BuilderOptions, FormDefinition } from '$lib/Utils/types';
+	import type { BuilderOptions, FormDefinition } from '#lib/Utils/types';
 	import {
 		opts,
 		componentSelectionPoppedOut,
@@ -15,28 +15,28 @@
 		allFields,
 		reloadConditions,
 		conditionManager
-	} from '$lib/Utils/store';
-	import ComponentSelection from '$lib/ComponentSelection/ComponentSelection.svelte';
-	import DragImage from '$lib/Utils/MiscComponents/DragImage.svelte';
-	import Settings from '$lib/Views/Settings.svelte';
-	import Header from '$lib/Views/Header.svelte';
-	import TabHeader from '$lib/Tabs/TabHeader.svelte';
-	import { OptionsProcessor } from '$lib/lib/OptionsProcessor';
-	import { BuilderAPI } from '$lib/lib/API/BuilderAPI';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import Tools from '$lib/Tools/Tools.svelte';
-	import ComponentPropertyPanel from '$lib/Form/PropertyPanel/PropertyPanel.svelte';
-	import Loader from '$lib/Utils/MiscComponents/Loader.svelte';
-	import { RenderManager } from '$lib/lib/RenderManager';
-	import { CScope } from '$lib/Utils/Utils';
+	} from '#lib/Utils/store';
+	import ComponentSelection from '#lib/ComponentSelection/ComponentSelection.svelte';
+	import DragImage from '#lib/Utils/MiscComponents/DragImage.svelte';
+	import Settings from '#lib/Views/Settings.svelte';
+	import Header from '#lib/Views/Header.svelte';
+	import TabHeader from '#lib/Tabs/TabHeader.svelte';
+	import { OptionsProcessor } from '#lib/lib/OptionsProcessor';
+	import { BuilderAPI } from '#lib/lib/API/BuilderAPI';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import Tools from '#lib/Tools/Tools.svelte';
+	import ComponentPropertyPanel from '#lib/Form/PropertyPanel/PropertyPanel.svelte';
+	import Loader from '#lib/Utils/MiscComponents/Loader.svelte';
+	import { RenderManager } from '#lib/lib/RenderManager';
+	import { CScope } from '#lib/Utils/Utils';
 	import 'balloon-css/balloon.min.css';
 	import 'pretty-checkbox/dist/pretty-checkbox.min.css';
-	import { RenderAPI } from '$lib/lib/API/RenderAPI';
-	import DisplayContentsWrapper from '$lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
-	import Form from '$lib/Views/Form.svelte';
-	import PinnedComponentSelection from '$lib/ComponentSelection/PinnedComponentSelection.svelte';
-	import ConditionsView from '$lib/Views/Conditions.svelte';
-	import { ConditionManager } from '$lib/lib/ConditionManager';
+	import { RenderAPI } from '#lib/lib/API/RenderAPI';
+	import DisplayContentsWrapper from '#lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
+	import Form from '#lib/Views/Form.svelte';
+	import PinnedComponentSelection from '#lib/ComponentSelection/PinnedComponentSelection.svelte';
+	import ConditionsView from '#lib/Views/Conditions.svelte';
+	import { ConditionManager } from '#lib/lib/ConditionManager';
 	import cloneDeep from 'lodash.clonedeep';
 	$numFormsMounted = 0;
 
@@ -67,7 +67,9 @@
 		);
 
 		//Sync all fields so it captures deleted items (which componentInstances will know about)
-		$allFields = $allFields.filter((x) => $componentInstances[x.htmlAttributes.id] != undefined);
+		$allFields = $allFields.filter(
+			(x) => $componentInstances[x.htmlAttributes?.id ?? ''] != undefined
+		);
 	}
 
 	let conditionLoaded = false;
@@ -178,7 +180,14 @@
 				]}
 			>
 				<span title="Tools" style:display={!showToolsIcon ? 'none' : ''}>
-					<Icon type="Tools" on:click={() => (showTools = !showTools)} size="20px" />
+					<button
+						type="button"
+						aria-label="Toggle tools"
+						on:click={() => (showTools = !showTools)}
+						style="background: transparent; border: 0; padding: 0; cursor: pointer;"
+					>
+						<Icon type="Tools" size="20px" />
+					</button>
 				</span>
 			</Header>
 			{#if showTools}
@@ -240,8 +249,9 @@
 
 <style>
 	.svelte-fb-root :global(*) {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-			'Open Sans', 'Helvetica Neue', sans-serif;
+		font-family:
+			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+			'Helvetica Neue', sans-serif;
 	}
 	.svelte-fb-root :global(.isDraggingTab) {
 		border: 1px dashed #0d99f2 !important;

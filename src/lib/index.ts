@@ -1,13 +1,15 @@
 // Re-export your entry components here
-import FormBuilder from '$lib/FormBuilder.svelte';
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
-import { convertDataAttributes } from '$lib/Utils/Utils';
-import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
-import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-import type { ThemeMap } from '$lib/Utils/Misc/Theme';
-import type { FormComponents, FormComponentsType } from '$lib/Utils/types';
-import type { BuilderAPI } from '$lib/lib/API/BuilderAPI';
-import type { RenderAPI } from '$lib/lib/API/RenderAPI';
+import FormBuilder from '#lib/FormBuilder.svelte';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
+import { convertDataAttributes } from '#lib/Utils/Utils';
+import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+import { ThemeMap } from '#lib/Utils/Misc/Theme';
+import { FormComponents } from '#lib/Utils/types';
+import type { FormComponentsType } from '#lib/Utils/types';
+import { BuilderAPI } from '#lib/lib/API/BuilderAPI';
+import { RenderAPI } from '#lib/lib/API/RenderAPI';
+import { toast, Toaster } from '#lib/toast';
 
 export {
 	FormBuilder,
@@ -16,8 +18,11 @@ export {
 	DefinitionManager,
 	convertDataAttributes,
 	ThemeMap,
-	FormComponentsType,
 	FormComponents,
 	BuilderAPI,
-	RenderAPI
+	RenderAPI,
+	toast,
+	Toaster
 };
+
+export type { FormComponentsType };

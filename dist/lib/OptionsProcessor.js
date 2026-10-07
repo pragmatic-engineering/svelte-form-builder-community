@@ -1,0 +1,221 @@
+import {
+	componentsLoaded,
+	importedComponents,
+	mainDefinition,
+	opts,
+	reloadConditions,
+	view
+} from '$lib/Utils/store';
+import { get } from 'svelte/store';
+import { TabManager } from '$lib/Tabs/TabManager';
+import merge from 'lodash.merge';
+import { DefinitionManager } from '$lib/lib/DefinitionManager';
+import {
+	defaultHTMLAttributes,
+	defaultDataAttributes,
+	defaultDisableStandardHTMLValidityCheck,
+	defaultHasChoices,
+	defaultNoTooltipProperties,
+	defaultDisabledHTMLAttributes
+} from '$lib/lib/DefaultAttributeMap';
+import { ThemeMap } from '$lib/Utils/Misc/Theme';
+import { DynamicImportMap, flavor } from '$lib/Utils/Misc/flavor';
+export class OptionsProcessor {
+	opts;
+	usedComponents = [];
+	constructor(opts) {
+		this.opts = opts;
+	}
+	static loadDefaults(options) {
+		const defaults = {
+			activeTabOrderValue: 1,
+			enableTabs: true,
+			confirmRemoveField: true,
+			confirmRemoveTab: true
+		};
+		//Set theme
+		if (options.theme) {
+			defaults.styling = ThemeMap[options.theme];
+		}
+		if (options.styling) {
+			defaults.styling = options.styling;
+		}
+		if (!defaults.styling) {
+			defaults.styling = ThemeMap['Default'];
+		}
+		if (!options.formDefinition) {
+			options.formDefinition = [];
+		}
+		if (flavor != 'enterprise') {
+			if (!options.disabledViews) {
+				options.disabledViews = {};
+			}
+			options.disabledViews.conditions = true;
+		}
+		//options = Object.assign({}, defaults, options);
+		options = merge({}, defaults, options);
+		opts.set(options);
+		//Change default view if passed in
+		view.set(options.view ?? 'build');
+	}
+	async init() {
+		if (get(componentsLoaded)) {
+			console.log(`Don't reload me Svelte!`);
+			return;
+		}
+		await this.InitialComponentLoad();
+		await this.ProcessFormDefinition();
+		componentsLoaded.set(true);
+	}
+	async InitialComponentLoad() {
+		for (const definition of this.opts.formDefinition) {
+			for (const row of definition.rows) {
+				for (const field of row.fields) {
+					await this.ImportComponent(field.componentName);
+				}
+			}
+		}
+	}
+	IsComponentLoaded(componentName) {
+		return get(importedComponents).some((x) => x.componentOptions.componentName == componentName);
+	}
+	async ImportComponent(componentName) {
+		if (this.IsComponentLoaded(componentName)) {
+			return;
+		}
+		const componentOptions = this.LoadComponent(componentName);
+		try {
+			const obj = componentOptions.customImport
+				? await componentOptions.customImport
+				: await DynamicImportMap[componentName];
+			if (!obj || !obj.default) {
+				console.error(`No component found for ${componentName}`);
+				return;
+			}
+			this.MergeComponentAttributes(componentOptions);
+			const componentImport = {
+				component: obj.default,
+				componentOptions: componentOptions
+			};
+			importedComponents.update((componentMap) => [...componentMap, componentImport]);
+			if (this.opts.builderAPIEvents?.onComponentImported) {
+				this.opts.builderAPIEvents?.onComponentImported.call(this, componentImport);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	//Merge any internal attributes into componentOptions
+	MergeComponentAttributes(componentOptions) {
+		const internalHTMLAttributes = defaultHTMLAttributes[componentOptions.componentName];
+		if (internalHTMLAttributes) {
+			componentOptions.htmlAttributes = merge(
+				{},
+				internalHTMLAttributes,
+				componentOptions.htmlAttributes
+			);
+			//componentOptions.htmlAttributes = Object.assign({}, obj.htmlAttributes, componentOptions.htmlAttributes);
+		}
+		const internalDataAttributes = defaultDataAttributes[componentOptions.componentName];
+		if (internalDataAttributes) {
+			if (!componentOptions.dataAttributes) {
+				componentOptions.dataAttributes = [];
+			}
+			for (const attribute of internalDataAttributes) {
+				//Overriding attributes that come from componentOptions matching on name
+				const userOverrideAttribute = componentOptions.dataAttributes?.filter(
+					(x) => x.name == attribute.name
+				)[0];
+				if (userOverrideAttribute) {
+					// attribute = userOverrideAttribute;
+					// componentOptions.dataAttributes = componentOptions.dataAttributes?.filter((x) => x != userOverrideAttribute);
+				} else {
+					//If not found, push to componentOptions
+					componentOptions.dataAttributes?.push({ ...attribute });
+				}
+			}
+		}
+		//Map over some other special attributes
+		componentOptions.disableStandardHTMLValidityCheck =
+			componentOptions.disableStandardHTMLValidityCheck ??
+			defaultDisableStandardHTMLValidityCheck[componentOptions.componentName];
+		componentOptions.hasChoices =
+			componentOptions.hasChoices ?? defaultHasChoices[componentOptions.componentName];
+		componentOptions.noTooltipProperties =
+			componentOptions.noTooltipProperties ??
+			defaultNoTooltipProperties[componentOptions.componentName];
+		//Combine disabled HTML Attributes
+		const defaultDisabled = defaultDisabledHTMLAttributes[componentOptions.componentName] ?? [];
+		componentOptions.disabledHtmlAttributes = [
+			...(componentOptions.disabledHtmlAttributes ?? []),
+			...defaultDisabled
+		];
+	}
+	LoadComponent(componentName) {
+		let componentOption = {
+			componentName: componentName
+		};
+		//Pass in user defined options (or load user defined component) if found by matching Component Name
+		const userDefinedComponentOptions = this.opts.componentOptions?.find(
+			(x) => x.componentName == componentName
+		);
+		if (userDefinedComponentOptions) {
+			componentOption = { ...componentOption, ...userDefinedComponentOptions };
+		}
+		this.opts.componentOptions?.push(componentOption);
+		return componentOption;
+	}
+	// Instantiate provided components to test they conform to a required interface
+	// private IsComponentValid(obj: any, importPath: string, testElement: HTMLElement | null) {
+	// 	let valid = true;
+	// 	try {
+	// 		let testInstance = new obj.default({ target: testElement });
+	// 		if (!testInstance.hasOwnProperty('field')) {
+	// 			console.error(
+	// 				`Component ${importPath} is not valid. Add 'export let field: Field' as a prop`
+	// 			);
+	// 			valid = false;
+	// 		}
+	// 		testInstance = null;
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		console.error(`Component ${importPath} could not be instantiated.`);
+	// 		valid = false;
+	// 	}
+	// 	return valid;
+	// }
+	async ProcessFormDefinition() {
+		//Setup default tab if starting with empty definition
+		if (!this.opts.formDefinition?.length) {
+			const definition = { rows: [] };
+			this.SetupDefaultTab(definition);
+			this.opts.formDefinition?.push(definition);
+		}
+		for (const definitions of this.opts.formDefinition) {
+			if (!this.opts.enableTabs && !definitions.tab) {
+				this.SetupDefaultTab(definitions);
+			}
+			TabManager.MergeTabAttributes(definitions.tab);
+			definitions.rows.forEach((row) => {
+				row.fields.forEach((field) => {
+					DefinitionManager.processField(field);
+				});
+			});
+		}
+		mainDefinition.set(this.opts.formDefinition);
+	}
+	async ReLoadDefinition(definition) {
+		get(opts).formDefinition = definition.formDefinition;
+		get(opts).conditions = definition.conditions;
+		if (definition.conditions) {
+			reloadConditions.set(true);
+		}
+		await this.ProcessFormDefinition();
+	}
+	SetupDefaultTab(definition) {
+		definition.tab = {};
+		definition.tab.tabOrder = 1;
+		definition.tab.label = 'Default';
+		definition.tab.id = 'default';
+	}
+}

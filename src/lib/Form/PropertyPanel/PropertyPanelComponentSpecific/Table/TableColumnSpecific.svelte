@@ -7,11 +7,11 @@
 
 <script lang="ts">
 	import { nanoid } from 'nanoid';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import SelectSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
-	import type { TableFBComponent } from '$lib/Utils/types';
-	import type { Field } from '$lib/Utils/types';
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import SelectSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
+	import type { TableFBComponent } from '#lib/Utils/types';
+	import type { Field } from '#lib/Utils/types';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
 	import type {
 		ColumnComponent,
 		ColumnDefinition,
@@ -20,17 +20,18 @@
 		StandardValidatorType
 	} from 'tabulator-tables';
 	import { onMount } from 'svelte';
-	import DisplayContentsWrapper from '$lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
-	import MoneyFormatter from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Formatters/MoneyFormatter.svelte';
-	import ImageFormatter from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Formatters/ImageFormatter.svelte';
-	import StarFormatter from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Formatters/StarFormatter.svelte';
-	import InputEditor from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Editors/InputEditor.svelte';
-	import ListEditor from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Editors/ListEditor.svelte';
-	import { RemoveAlphaNumeric } from '$lib/Utils/Utils';
+	import DisplayContentsWrapper from '#lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import MoneyFormatter from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Formatters/MoneyFormatter.svelte';
+	import ImageFormatter from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Formatters/ImageFormatter.svelte';
+	import StarFormatter from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Formatters/StarFormatter.svelte';
+	import InputEditor from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Editors/InputEditor.svelte';
+	import ListEditor from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/Editors/ListEditor.svelte';
+	import { RemoveAlphaNumeric } from '#lib/Utils/Utils';
 
 	export let field: Field;
+	void field;
 
 	// let table: TabulatorFull;
 	let column: ColumnComponent;

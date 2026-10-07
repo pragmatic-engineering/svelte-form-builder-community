@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { nanoid } from 'nanoid';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import { LibraryPrefix } from '$lib/Utils/Utils';
-	import SelectSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
-	import type { Field } from '$lib/Utils/types';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import { LibraryPrefix } from '#lib/Utils/Utils';
+	import SelectSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
+	import type { Field } from '#lib/Utils/types';
 
 	export let field: Field;
+	void field;
 	let id = `${LibraryPrefix}-tooltip-${nanoid(10)}`;
 </script>
 

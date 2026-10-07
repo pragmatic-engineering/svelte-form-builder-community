@@ -1,4 +1,4 @@
-import type { FormComponentsType } from '$lib/Utils/types';
+import type { FormComponentsType } from '#lib/Utils/types';
 
 export const flavor: 'community' | 'pro' | 'enterprise' = 'community';
 

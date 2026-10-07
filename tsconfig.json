@@ -1,17 +1,24 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json",
+	"extends": "$app/tsconfig",
 	"compilerOptions": {
 		"allowJs": true,
+		"baseUrl": ".",
 		"checkJs": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
+		"ignoreDeprecations": "6.0",
+		"moduleResolution": "bundler",
+		"paths": {
+			"#lib": ["src/lib"],
+			"#lib/*": ["src/lib/*"]
+		},
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true
-	}
-	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
-	//
-	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-	// from the referenced tsconfig.json - TypeScript does not merge them in
+		"strict": true,
+		"types": ["node", "vite/client", "$app/types"],
+		"verbatimModuleSyntax": true
+	},
+	"include": ["src", "test", "*"],
+	"exclude": ["src/service-worker"]
 }

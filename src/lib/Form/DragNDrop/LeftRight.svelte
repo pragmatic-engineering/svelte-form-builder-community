@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { opts } from '$lib/Utils/store';
+	import { opts } from '#lib/Utils/store';
 	import { get } from 'svelte/store';
 	import { scale } from 'svelte/transition';
 
@@ -40,6 +40,7 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	bind:this={dropzone}
 	in:scale|global={{ duration: 850 }}
@@ -48,7 +49,7 @@
 	on:dragenter={(e) => dragEnter(e)}
 	on:dragover={(e) => dragOver(e)}
 	on:drop
-/>
+></div>
 
 <style>
 	div {

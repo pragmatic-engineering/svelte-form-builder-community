@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
 	import type { InputParams } from 'tabulator-tables';
 
 	export let editorParams: InputParams;

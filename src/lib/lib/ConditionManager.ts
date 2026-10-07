@@ -1,4 +1,4 @@
-import type { Condition, Field } from '$lib/Utils/types';
+import type { Condition, Field } from '#lib/Utils/types';
 
 export class ConditionManager {
 	conditions: Condition[] = [];

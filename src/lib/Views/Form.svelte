@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Field, FormDefinition, FormTab } from '$lib/Utils/types';
+	import type { Field, FormDefinition, FormTab } from '#lib/Utils/types';
 	import {
 		isDraggingStore,
 		dropTargetRowIndexStore,
@@ -14,15 +14,15 @@
 		formMounted,
 		numFormsMounted,
 		allFields
-	} from '$lib/Utils/store';
-	import LeftRightDropTarget from '$lib/Form/DragNDrop/LeftRight.svelte';
-	import TopBottomDropTarget from '$lib/Form/DragNDrop/TopBottom.svelte';
+	} from '#lib/Utils/store';
+	import LeftRightDropTarget from '#lib/Form/DragNDrop/LeftRight.svelte';
+	import TopBottomDropTarget from '#lib/Form/DragNDrop/TopBottom.svelte';
 	import { fade } from 'svelte/transition';
-	import { DragNDrop } from '$lib/Form/DragNDrop/DragNDrop';
-	import FieldQuickMenu from '$lib/Form/QuickMenu/QuickMenu.svelte';
-	import { QuickMenuUtils } from '$lib/Form/QuickMenu/QuickMenuUtils';
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
-	import { CScope } from '$lib/Utils/Utils';
+	import { DragNDrop } from '#lib/Form/DragNDrop/DragNDrop';
+	import FieldQuickMenu from '#lib/Form/QuickMenu/QuickMenu.svelte';
+	import { QuickMenuUtils } from '#lib/Form/QuickMenu/QuickMenuUtils';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
+	import { CScope } from '#lib/Utils/Utils';
 	import { onMount } from 'svelte';
 	onMount(() => {
 		if ($opts.builderAPIEvents?.onFormMounted) {
@@ -105,6 +105,7 @@
 								{/if}
 
 								<!-- Component Wrapper -->
+								<!-- svelte-ignore a11y_no_static_element_interactions -->
 								<div
 									in:fade
 									class="{CScope('control')} col"
@@ -141,7 +142,7 @@
 											componentOptions={componentImport.componentOptions}
 											{tab}
 											bind:field
-											bind:this={$componentInstances[field.htmlAttributes.id]}
+											bind:this={$componentInstances[field.htmlAttributes?.id ?? '']}
 											on:pointerleave={onPointerLeaveComponent}
 											on:pointerenter={onPointerEnterComponent}
 										/>

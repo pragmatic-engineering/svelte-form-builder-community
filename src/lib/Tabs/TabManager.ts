@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
-import { mainDefinition, opts } from '$lib/Utils/store';
-import type { FormDefinition, FormTab, BuilderOptions } from '$lib/Utils/types';
-import { LibraryPrefix } from '$lib/Utils/Utils';
+import { mainDefinition, opts } from '#lib/Utils/store';
+import type { FormDefinition, FormTab, BuilderOptions } from '#lib/Utils/types';
+import { LibraryPrefix } from '#lib/Utils/Utils';
 
 export class TabManager {
 	constructor(public opts: BuilderOptions) {}

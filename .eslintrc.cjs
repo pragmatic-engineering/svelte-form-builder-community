@@ -8,12 +8,11 @@ module.exports = {
 		'plugin:svelte/recommended'
 	],
 	plugins: ['@typescript-eslint'],
-	ignorePatterns: ['*.cjs'],
+	ignorePatterns: ['*.cjs', 'dist', 'package', 'node_modules', '.svelte-kit', '*.d.ts'],
 	overrides: [
 		{
 			files: ['*.svelte'],
 			parser: 'svelte-eslint-parser',
-			// Parse the `<script>` in `.svelte` as TypeScript by adding the following configuration.
 			parserOptions: {
 				parser: '@typescript-eslint/parser'
 			}
@@ -30,6 +29,18 @@ module.exports = {
 		node: true
 	},
 	rules: {
-		'no-debugger': 'off'
+		'no-debugger': 'off',
+		'no-var': 'off',
+		'svelte/no-at-html-tags': 'off',
+		'svelte/no-unused-svelte-ignore': 'off',
+		'no-unsafe-optional-chaining': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/no-inferrable-types': 'off',
+		'@typescript-eslint/no-empty-function': 'off',
+		'@typescript-eslint/ban-types': 'off',
+		'@typescript-eslint/no-unused-vars': [
+			'warn',
+			{ argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' }
+		]
 	}
 };

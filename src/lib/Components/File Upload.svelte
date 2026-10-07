@@ -1,13 +1,16 @@
 <script lang="ts">
-	import type { Field, FormTab, ComponentOptions, FileUploadSerialization } from '$lib/Utils/types';
-	import { convertDataAttributes } from '$lib/Utils/Utils';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import { conditionManager } from '$lib/Utils/store';
+	import type { Field, FormTab, ComponentOptions, FileUploadSerialization } from '#lib/Utils/types';
+	import { convertDataAttributes } from '#lib/Utils/Utils';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import { conditionManager } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	let files: FileList;
 	let input: HTMLInputElement;

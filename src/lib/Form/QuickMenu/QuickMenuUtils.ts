@@ -1,13 +1,13 @@
-import type { Field, FormDefinition } from '$lib/Utils/types';
+import type { Field, FormDefinition } from '#lib/Utils/types';
 import {
 	isPointerOverFieldStore,
 	focusedField,
 	propertyField,
 	showPropertyPanel,
 	opts
-} from '$lib/Utils/store';
+} from '#lib/Utils/store';
 import { get } from 'svelte/store';
-import { CScope } from '$lib/Utils/Utils';
+import { CScope } from '#lib/Utils/Utils';
 
 export class QuickMenuUtils {
 	constructor(public definition: FormDefinition) {}

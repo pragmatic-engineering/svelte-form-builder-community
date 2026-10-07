@@ -1,9 +1,9 @@
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
-import type { Field, FormTab } from '$lib/Utils/types';
-import type { FieldGroup } from '$lib/Utils/types';
-import { validateDefinitions } from '$lib/lib/Validation';
-import { TabManager } from '$lib/Tabs/TabManager';
-import { setComponentSelectionCategory } from '$lib/Utils/store';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
+import type { Field, FormTab } from '#lib/Utils/types';
+import type { FieldGroup } from '#lib/Utils/types';
+import { validateDefinitions } from '#lib/lib/Validation';
+import { TabManager } from '#lib/Tabs/TabManager';
+import { setComponentSelectionCategory } from '#lib/Utils/store';
 
 export class BuilderAPI {
 	/**

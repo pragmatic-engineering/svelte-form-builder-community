@@ -1,13 +1,15 @@
 <script lang="ts">
-	import type { ComponentOptions, Field } from '$lib/Utils/types';
-	import { convertDataAttributes, CScope } from '$lib/Utils/Utils';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import type { ComponentOptions, Field } from '#lib/Utils/types';
+	import { convertDataAttributes, CScope } from '#lib/Utils/Utils';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 
-	import { conditionManager, view } from '$lib/Utils/store';
+	import { conditionManager, view } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
+	void field;
+	void componentOptions;
 
 	//Completely hide the parent container as well
 	function init(e: HTMLElement) {

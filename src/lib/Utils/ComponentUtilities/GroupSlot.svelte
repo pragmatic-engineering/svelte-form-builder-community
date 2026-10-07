@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { Field } from '$lib/Utils/types';
+	import type { Field } from '#lib/Utils/types';
 	export let field: Field;
+	void field;
 	let hidden = field.hidden;
 
 	function fadePlus(node: HTMLElement, { delay = 0, duration = 400, color = 'yellow' }) {
@@ -10,7 +11,7 @@
 			delay,
 			duration,
 			color,
-			css: (t) => `
+			css: (t: number) => `
         opacity: ${t * o};
         background-color: ${color};        
         `

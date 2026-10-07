@@ -1,7 +1,7 @@
 //                              Definitions
 //***************************************************************************************/
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { HTMLAttributes } from '$lib/Utils/other-types/svelte-types';
+import type { HTMLAttributes } from '#lib/Utils/other-types/svelte-types';
 
 export const FormComponents = [
 	'Button',
@@ -108,7 +108,10 @@ export interface ChoiceConfiguration {
 	choices?: ChoiceElement[];
 }
 
-export type ChoiceElement = Partial<HTMLOptionElement>;
+export type ChoiceElement = Partial<HTMLOptionElement> & {
+	labelElement?: HTMLInputElement;
+	valueElement?: HTMLInputElement;
+};
 
 export const ChoiceShapeStyle = ['square', 'curve', 'round'] as const;
 export type ChoiceShapeStyleType = (typeof ChoiceShapeStyle)[number];
@@ -171,10 +174,9 @@ export interface FormTab {
 //***************************************************************************************/
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { SvelteComponent } from 'svelte';
-import type { DOMAttributes } from '$lib/Utils/other-types/svelte-types';
+import type { DOMAttributes } from '#lib/Utils/other-types/svelte-types';
 import type { ColumnComponent } from 'tabulator-tables';
-import type { ThemeType } from '$lib/Utils/Misc/Theme';
+import type { ThemeType } from '#lib/Utils/Misc/Theme';
 
 export interface BuilderOptions {
 	componentOptions?: ComponentOptions[];
@@ -312,14 +314,13 @@ export interface onAddChoiceParams {
 }
 
 export interface ComponentImport {
-	component: SvelteFBComponent;
+	component: any;
 	//componentExport: ComponentExport;
 	componentOptions: ComponentOptions;
 }
 
 export interface SvelteFBComponent {
 	$set(props: { show?: boolean; field?: Field }): unknown;
-	component: new (...args: any) => SvelteComponent;
 	validateDefinition?: () => ValidationResult; //Validation when defining the field
 	validateUserInput?: () => ValidationResult; //Validation when using the field
 	customGetUserData?: () => any; //Method to get the component user data in a custom way. It would be typically used for special non-standard HTML inputs (i.e TinyMCE) that don't use htmlAttribute.value

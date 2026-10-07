@@ -1,17 +1,21 @@
 <script lang="ts">
-	import type { Field, FormTab, ComponentOptions } from '$lib/Utils/types';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import { convertDataAttributes } from '$lib/Utils/Utils';
+	import type { Field, FormTab, ComponentOptions } from '#lib/Utils/types';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import { convertDataAttributes } from '#lib/Utils/Utils';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	$: flavor = field.dataAttributes?.find((x) => x.name == 'flavor')?.value;
 </script>
 
 <GroupSlot bind:field>
 	{@const elementType = typeof flavor === 'string' ? flavor : 'h1'}
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div on:pointerleave on:pointerenter>
 		<svelte:element
 			this={elementType}

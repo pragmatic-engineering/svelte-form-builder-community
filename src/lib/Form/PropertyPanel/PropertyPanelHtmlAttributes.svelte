@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { capitalizeFirstLetter } from '$lib/Utils/Utils';
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import { capitalizeFirstLetter } from '#lib/Utils/Utils';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
 
 	export let guid: string;
 
@@ -20,7 +20,7 @@
 {#if typeof value === 'string'}
 	<TextSlot>
 		<Label forName={id} {label} />
-		<div contenteditable="true" type="text" {id} bind:textContent={value} />
+		<div contenteditable="true" {id} bind:textContent={value}></div>
 	</TextSlot>
 {/if}
 

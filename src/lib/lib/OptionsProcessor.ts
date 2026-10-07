@@ -5,12 +5,12 @@ import {
 	opts,
 	reloadConditions,
 	view
-} from '$lib/Utils/store';
+} from '#lib/Utils/store';
 import { get } from 'svelte/store';
-import { TabManager } from '$lib/Tabs/TabManager';
+import { TabManager } from '#lib/Tabs/TabManager';
 import merge from 'lodash.merge';
 
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
 import {
 	defaultHTMLAttributes,
 	defaultDataAttributes,
@@ -18,12 +18,12 @@ import {
 	defaultHasChoices,
 	defaultNoTooltipProperties,
 	defaultDisabledHTMLAttributes
-} from '$lib/lib/DefaultAttributeMap';
+} from '#lib/lib/DefaultAttributeMap';
 
-import type { BuilderOptions, ComponentOptions } from '$lib/Utils/types';
-import { ThemeMap } from '$lib/Utils/Misc/Theme';
-import type { FormComponentsType, FormDefinition, FormTab } from '$lib/Utils/types';
-import { DynamicImportMap, flavor } from '$lib/Utils/Misc/flavor';
+import type { BuilderOptions, ComponentOptions } from '#lib/Utils/types';
+import { ThemeMap } from '#lib/Utils/Misc/Theme';
+import type { FormComponentsType, FormDefinition, FormTab } from '#lib/Utils/types';
+import { DynamicImportMap, flavor } from '#lib/Utils/Misc/flavor';
 
 export class OptionsProcessor {
 	usedComponents: FormComponentsType[] = [];
@@ -176,15 +176,11 @@ export class OptionsProcessor {
 			defaultNoTooltipProperties[componentOptions.componentName];
 
 		//Combine disabled HTML Attributes
-		if (componentOptions.disabledHtmlAttributes) {
-			componentOptions.disabledHtmlAttributes = [
-				...componentOptions.disabledHtmlAttributes,
-				...defaultDisabledHTMLAttributes[componentOptions.componentName]
-			];
-		} else {
-			componentOptions.disabledHtmlAttributes =
-				defaultDisabledHTMLAttributes[componentOptions.componentName];
-		}
+		const defaultDisabled = defaultDisabledHTMLAttributes[componentOptions.componentName] ?? [];
+		componentOptions.disabledHtmlAttributes = [
+			...(componentOptions.disabledHtmlAttributes ?? []),
+			...defaultDisabled
+		];
 	}
 
 	private LoadComponent(componentName: FormComponentsType): ComponentOptions {

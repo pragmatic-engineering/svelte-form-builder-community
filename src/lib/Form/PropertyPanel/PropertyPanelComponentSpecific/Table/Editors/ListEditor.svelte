@@ -1,11 +1,12 @@
 <script lang="ts">
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
 	import { nanoid } from 'nanoid';
 	import type { ListEditorParams } from 'tabulator-tables';
-	import PropertyPanelChoices from '$lib/Form/PropertyPanel/PropertyPanelChoices.svelte';
-	import type { Field } from '$lib/Utils/types';
+	import PropertyPanelChoices from '#lib/Form/PropertyPanel/PropertyPanelChoices.svelte';
+	import type { Field } from '#lib/Utils/types';
 
 	export let field: Field;
+	void field;
 	export let editorParams: ListEditorParams;
 
 	if (field.choiceConfiguration) {

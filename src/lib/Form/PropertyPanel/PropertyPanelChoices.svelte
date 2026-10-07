@@ -1,23 +1,26 @@
 <script lang="ts">
 	import { nanoid } from 'nanoid';
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { opts } from '$lib/Utils/store';
-	import type { ChoiceConfiguration, ChoiceElement, Field } from '$lib/Utils/types';
-	import { LibraryPrefix } from '$lib/Utils/Utils';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { opts } from '#lib/Utils/store';
+	import type { ChoiceConfiguration, ChoiceElement, Field } from '#lib/Utils/types';
+	import { LibraryPrefix } from '#lib/Utils/Utils';
 	import { onMount } from 'svelte';
 
 	export let field: Field;
+	void field;
 	export let choiceConfiguration: ChoiceConfiguration | undefined;
 	export let customAttribute: any = undefined;
 
 	let showBulkAdd = false;
-	// let valueElements = [];
-	// let labelElements = [];
-	$: valueElements =
-		choiceConfiguration?.choices && choiceConfiguration.choices.map((i) => i.valueElement);
-	$: labelElements =
-		choiceConfiguration?.choices && choiceConfiguration.choices.map((i) => i.labelElement);
+	let valueElements: HTMLInputElement[] = [];
+	let labelElements: HTMLInputElement[] = [];
+	$: valueElements = (choiceConfiguration?.choices ?? [])
+		.map((i) => i.valueElement)
+		.filter(Boolean) as HTMLInputElement[];
+	$: labelElements = (choiceConfiguration?.choices ?? [])
+		.map((i) => i.labelElement)
+		.filter(Boolean) as HTMLInputElement[];
 
 	// $: {
 	//   console.log(valueElements, labelElements);
@@ -69,19 +72,15 @@
 			return;
 		}
 
-		const lastValueElement = valueElements[valueElements.length - 1];
+		const lastValueElement = valueElements.at(-1);
 		if (lastValueElement && !lastValueElement.value) {
 			e.preventDefault();
 		}
 
-		if (
-			lastValueElement &&
-			lastValueElement.value &&
-			valueElements[valueElements.length - 1] == e.currentTarget
-		) {
+		if (lastValueElement && lastValueElement.value && valueElements.at(-1) == e.currentTarget) {
 			addChoice();
 			setTimeout(() => {
-				labelElements[labelElements.length - 1].focus();
+				labelElements.at(-1)?.focus();
 			}, 0);
 		}
 	}
@@ -141,12 +140,14 @@
 {/if}
 
 <div class="choices-content">
-	<span />
+	<span></span>
 	<b>Label</b>
 	<b>Value</b>
 
 	{#if choiceConfiguration && choiceConfiguration.choices}
 		{#each choiceConfiguration.choices as choice, i}
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<span class="delete" on:click={() => deleteChoice(choice)}
 				><Icon type="Delete" fill="red" size="18" /></span
 			>
@@ -165,8 +166,10 @@
 		{/each}
 	{/if}
 
-	<span />
+	<span></span>
 	<b>
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div class="button-container" on:click={() => addChoice()}>
 			<span class="button-wrap tool-button">
 				<span>Add</span>
@@ -174,7 +177,7 @@
 			</span>
 		</div>
 	</b>
-	<span />
+	<span></span>
 </div>
 
 <hr />
@@ -203,7 +206,7 @@
 	</ul>
 
 	<div>
-		<textarea bind:this={bulkAddTextArea} class="bulk-add-textarea" rows="20" />
+		<textarea bind:this={bulkAddTextArea} class="bulk-add-textarea" rows="20"></textarea>
 		<button on:click={doBulkAdd}>Save</button>
 	</div>
 {/if}

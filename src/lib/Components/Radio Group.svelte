@@ -1,17 +1,20 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { convertDataAttributes, LibraryPrefix } from '$lib/Utils/Utils';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import { convertDataAttributes, LibraryPrefix } from '#lib/Utils/Utils';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
 
-	import { getErrorMessage_Required } from '$lib/lib/Validation';
-	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
-	import CheckboxRadioCommon from '$lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
-	import { conditionManager } from '$lib/Utils/store';
+	import { getErrorMessage_Required } from '#lib/lib/Validation';
+	import type { Field, FormTab, ComponentOptions, ValidationResult } from '#lib/Utils/types';
+	import CheckboxRadioCommon from '#lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
+	import { conditionManager } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	export function validateUserInput(): ValidationResult {
 		const value = customGetUserData();
@@ -70,7 +73,7 @@
 
 <GroupSlot bind:field>
 	<ComponentLabel {field} />
-
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<span
 		style:display={field.choiceConfiguration?.inline ? '' : 'contents'}
 		on:pointerleave

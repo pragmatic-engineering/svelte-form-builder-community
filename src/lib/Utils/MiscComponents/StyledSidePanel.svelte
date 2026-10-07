@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { opts } from '$lib/Utils/store';
+	import { opts } from '#lib/Utils/store';
 	import { onMount } from 'svelte';
 
 	let top: string;

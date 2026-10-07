@@ -1,12 +1,15 @@
 <script lang="ts">
-	import type { Field, FormTab, ComponentOptions } from '$lib/Utils/types';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import type { Field, FormTab, ComponentOptions } from '#lib/Utils/types';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
 
-	import { convertDataAttributes } from '$lib/Utils/Utils';
+	import { convertDataAttributes } from '#lib/Utils/Utils';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	let height: string;
 	$: {
@@ -25,5 +28,5 @@
 		{...convertDataAttributes(field.dataAttributes)}
 		on:pointerleave
 		on:pointerenter
-	/>
+	></div>
 </GroupSlot>

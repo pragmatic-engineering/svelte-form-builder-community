@@ -1,6 +1,6 @@
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
-import { componentInstances } from '$lib/Utils/store';
-import type { Field, SerializeResult } from '$lib/Utils/types';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
+import { componentInstances } from '#lib/Utils/store';
+import type { Field, SerializeResult } from '#lib/Utils/types';
 import { get } from 'svelte/store';
 
 export class RenderManager {

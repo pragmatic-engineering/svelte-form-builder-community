@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { opts } from '$lib/Utils/store';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
-	import type { Field } from '$lib/Utils/types';
+	import { opts } from '#lib/Utils/store';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import type { Field } from '#lib/Utils/types';
 
 	export let guid: string;
 	export let field: Field;
+	void field;
 </script>
 
 {#if field.labelAttributes}
@@ -13,10 +14,9 @@
 		<Label forName={`${guid}.label`} label={'Label'} />
 		<div
 			contenteditable="true"
-			type="text"
 			id={`${guid}.label`}
 			bind:textContent={field.labelAttributes.label}
-		/>
+		></div>
 	</TextSlot>
 
 	{#if $opts.showLabelMaxWidth}

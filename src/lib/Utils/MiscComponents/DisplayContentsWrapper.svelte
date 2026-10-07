@@ -1,13 +1,13 @@
 <script lang="ts">
-  export let showIf: boolean;
+	export let showIf: boolean;
 </script>
 
-<span class="wrapper" style:display="{showIf ? "" : "none"}">
-  <slot />
+<span class="wrapper" style:display={showIf ? '' : 'none'}>
+	<slot />
 </span>
 
 <style>
-  .wrapper {
-    display: contents;
-  }
+	.wrapper {
+		display: contents;
+	}
 </style>

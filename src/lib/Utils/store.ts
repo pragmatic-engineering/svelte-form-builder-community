@@ -1,6 +1,6 @@
-import type { ConditionManager } from '$lib/lib/ConditionManager';
-import type { OptionsProcessor } from '$lib/lib/OptionsProcessor';
-import { TabManager } from '$lib/Tabs/TabManager';
+import type { ConditionManager } from '#lib/lib/ConditionManager';
+import type { OptionsProcessor } from '#lib/lib/OptionsProcessor';
+import { TabManager } from '#lib/Tabs/TabManager';
 import type {
 	ComponentImport,
 	BuilderOptions,
@@ -8,7 +8,7 @@ import type {
 	FormDefinition,
 	Field,
 	views
-} from '$lib/Utils/types';
+} from '#lib/Utils/types';
 import { writable, derived } from 'svelte/store';
 
 export const importedComponents = writable([] as ComponentImport[]);

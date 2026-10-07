@@ -1,8 +1,8 @@
 import { get } from 'svelte/store';
 
-import type { ValidationError, ValidationResult, FieldInfo } from '$lib/Utils/types';
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
-import { componentInstances } from '$lib/Utils/store';
+import type { ValidationError, ValidationResult, FieldInfo } from '#lib/Utils/types';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
+import { componentInstances } from '#lib/Utils/store';
 
 export function validateDefinitions() {
 	const results: ValidationError[] = [];

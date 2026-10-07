@@ -1,6 +1,6 @@
-import { isTabDragging } from '$lib/Utils/store';
-import type { FormTab } from '$lib/Utils/types';
-import { CScope } from '$lib/Utils/Utils';
+import { isTabDragging } from '#lib/Utils/store';
+import type { FormTab } from '#lib/Utils/types';
+import { CScope } from '#lib/Utils/Utils';
 
 export class DragNDropTabs {
 	dragSource_Tab: FormTab | null = null;

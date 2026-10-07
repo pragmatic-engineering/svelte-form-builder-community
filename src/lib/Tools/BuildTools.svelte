@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
-	import { optionsProcessorStore, opts } from '$lib/Utils/store';
-	import type { BuilderOptions } from '$lib/Utils/types';
-	import { CScope } from '$lib/Utils/Utils';
-	import { validateDefinitions } from '$lib/lib/Validation';
-	import { TabManager } from '$lib/Tabs/TabManager';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
+	import { optionsProcessorStore, opts } from '#lib/Utils/store';
+	import type { BuilderOptions } from '#lib/Utils/types';
+	import { CScope } from '#lib/Utils/Utils';
+	import { validateDefinitions } from '#lib/lib/Validation';
+	import { TabManager } from '#lib/Tabs/TabManager';
 
 	export let contentData: string;
 	export let customContentData: any;
@@ -81,7 +81,7 @@
 			<input type="file" id={CScope('file-import')} class="file" bind:files />
 			<label for={CScope('file-import')} class="tool-button">
 				Import Definition
-				<p class="file-name" />
+				<p class="file-name"></p>
 			</label>
 		</div>
 	{/key}

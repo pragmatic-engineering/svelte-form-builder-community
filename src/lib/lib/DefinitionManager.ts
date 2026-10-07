@@ -6,14 +6,14 @@ import {
 	mainDefinition,
 	optionsProcessorStore,
 	opts
-} from '$lib/Utils/store';
+} from '#lib/Utils/store';
 import { get } from 'svelte/store';
 import merge from 'lodash.merge';
-import { TabManager } from '$lib/Tabs/TabManager';
-import type { BuilderOptions, FieldInfo } from '$lib/Utils/types';
-import type { Field, FormDefinition, FormTab } from '$lib/Utils/types';
-import type { ComponentImport, FieldGroup, SvelteFBComponent } from '$lib/Utils/types';
-import type { HTMLAttributes } from '$lib/Utils/other-types/svelte-types';
+import { TabManager } from '#lib/Tabs/TabManager';
+import type { BuilderOptions, FieldInfo } from '#lib/Utils/types';
+import type { Field, FormDefinition, FormTab } from '#lib/Utils/types';
+import type { ComponentImport, FieldGroup, SvelteFBComponent } from '#lib/Utils/types';
+import type { HTMLAttributes } from '#lib/Utils/other-types/svelte-types';
 
 export class DefinitionManager {
 	static getFieldComponent(field: Field) {

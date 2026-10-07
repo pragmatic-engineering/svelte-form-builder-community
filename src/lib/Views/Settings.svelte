@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { nanoid } from 'nanoid';
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
-	import { opts } from '$lib/Utils/store';
-	import { LibraryPrefix } from '$lib/Utils/Utils';
-	import SelectSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import { Theme, ThemeMap, type ThemeType } from '$lib/Utils/Misc/Theme';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import { opts } from '#lib/Utils/store';
+	import { LibraryPrefix } from '#lib/Utils/Utils';
+	import SelectSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import { Theme, ThemeMap, type ThemeType } from '#lib/Utils/Misc/Theme';
 	let fontSize = '22px';
 
-	let selectedTheme: ThemeType | undefined = $opts.theme;
+	let selectedTheme: ThemeType = $opts.theme ?? 'Default';
 </script>
 
 <div>
@@ -80,7 +80,11 @@
 			style:width={'200px'}
 			id={selectID}
 			bind:value={selectedTheme}
-			on:change={() => ($opts.styling = ThemeMap[selectedTheme])}
+			on:change={() => {
+				if (selectedTheme) {
+					$opts.styling = ThemeMap[selectedTheme];
+				}
+			}}
 		>
 			{#each Theme as theme}
 				<option value={theme}>{theme}</option>

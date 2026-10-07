@@ -1,9 +1,9 @@
-import { opts } from '$lib/Utils/store';
-import type { HTMLAttributes } from '$lib/Utils/other-types/svelte-types';
+import { opts } from '#lib/Utils/store';
+import type { HTMLAttributes } from '#lib/Utils/other-types/svelte-types';
 
-import type { CustomDataAttribute, FormComponentsType } from '$lib/Utils/types';
-import type { ComponentSelectionMetaData } from '$lib/Utils/types';
-import type { HTMLAttributesKeys } from '$lib/Utils/types';
+import type { CustomDataAttribute, FormComponentsType } from '#lib/Utils/types';
+import type { ComponentSelectionMetaData } from '#lib/Utils/types';
+import type { HTMLAttributesKeys } from '#lib/Utils/types';
 import { get } from 'svelte/store';
 
 function GetUserDefinedComponentOptions(componentName: FormComponentsType) {

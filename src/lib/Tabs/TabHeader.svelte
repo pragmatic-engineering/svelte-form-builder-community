@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { DragNDropTabs } from '$lib/Tabs/DragNDrop';
-	import { mainDefinition, opts, tabPropertiesOpen, view } from '$lib/Utils/store';
-	import type { FormTab } from '$lib/Utils/types';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import TabProperties from '$lib/Tabs/TabPropertyPanel.svelte';
-	import TabQuickMenu from '$lib/Tabs/QuickMenu.svelte';
-	import { convertDataAttributes, LibraryPrefix } from '$lib/Utils/Utils';
-	import { TabManager } from '$lib/Tabs/TabManager';
+	import { DragNDropTabs } from '#lib/Tabs/DragNDrop';
+	import { mainDefinition, opts, tabPropertiesOpen, view } from '#lib/Utils/store';
+	import type { FormTab } from '#lib/Utils/types';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import TabProperties from '#lib/Tabs/TabPropertyPanel.svelte';
+	import TabQuickMenu from '#lib/Tabs/QuickMenu.svelte';
+	import { convertDataAttributes, LibraryPrefix } from '#lib/Utils/Utils';
+	import { TabManager } from '#lib/Tabs/TabManager';
 
 	let DnD = new DragNDropTabs();
 
@@ -27,6 +27,8 @@
 					draggable={$view == 'build' && !$opts.disableDragNDropTabs}
 					class={$opts.activeTabOrderValue === formDefinition.tab.tabOrder ? 'active' : ''}
 				>
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<span
 						on:click={() =>
 							TabManager.activateTab(formDefinition.tab && formDefinition.tab.tabOrder)}
@@ -55,6 +57,8 @@
 		<!-- Add New Tab -->
 		{#if $view == 'build'}
 			<li>
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<span on:click={() => TabManager.addTab()}>
 					<Icon type="SquarePlus" />
 				</span>

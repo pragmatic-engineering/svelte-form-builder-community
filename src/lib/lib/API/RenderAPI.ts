@@ -1,6 +1,6 @@
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
-import { RenderManager } from '$lib/lib/RenderManager';
-import { validateUserInputs } from '$lib/lib/Validation';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
+import { RenderManager } from '#lib/lib/RenderManager';
+import { validateUserInputs } from '#lib/lib/Validation';
 
 export class RenderAPI {
 	/**

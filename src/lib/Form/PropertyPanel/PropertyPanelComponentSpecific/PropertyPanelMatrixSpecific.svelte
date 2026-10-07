@@ -1,9 +1,10 @@
 <script lang="ts">
-	import PropertyPanelChoices from '$lib/Form/PropertyPanel/PropertyPanelChoices.svelte';
-	import type { Field } from '$lib/Utils/types';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import PropertyPanelChoices from '#lib/Form/PropertyPanel/PropertyPanelChoices.svelte';
+	import type { Field } from '#lib/Utils/types';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
 
 	export let field: Field;
+	void field;
 </script>
 
 <TextSlot>

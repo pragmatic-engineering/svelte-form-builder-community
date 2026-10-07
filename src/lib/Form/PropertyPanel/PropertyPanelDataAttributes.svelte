@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { CustomDataAttribute } from '$lib/Utils/types';
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
-	import SelectSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import type { CustomDataAttribute } from '#lib/Utils/types';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import SelectSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
 
 	export let dataAttribute: CustomDataAttribute;
 	export let guid: string;
@@ -45,7 +45,7 @@
 	{:else if dataAttribute.valueType == 'string' || typeof dataAttribute.value === 'string'}
 		<TextSlot>
 			<Label forName={id} label={dataAttribute.label} />
-			<div contenteditable="true" type="text" {id} bind:textContent={dataAttribute.value} />
+			<div contenteditable="true" {id} bind:textContent={dataAttribute.value}></div>
 		</TextSlot>
 	{:else if dataAttribute.valueType == 'number' || typeof dataAttribute.value === 'number'}
 		<TextSlot>

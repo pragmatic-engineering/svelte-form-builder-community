@@ -1,7 +1,7 @@
-import type { StyleConfig } from '$lib/Utils/types';
+import type { StyleConfig } from '#lib/Utils/types';
 
 export const Theme = ['Default', 'Dark'] as const;
-export type ThemeType = typeof Theme[number];
+export type ThemeType = (typeof Theme)[number];
 
 export const ThemeMap: Record<ThemeType, StyleConfig> = {
 	Default: {

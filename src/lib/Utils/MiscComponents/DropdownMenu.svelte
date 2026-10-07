@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon, { type IconType } from '$lib/Utils/MiscComponents/Icon.svelte';
+	import Icon, { type IconType } from '#lib/Utils/MiscComponents/Icon.svelte';
 
 	export let title = '';
 	export let icon: IconType = 'VerticalMenu';
@@ -7,7 +7,9 @@
 	export let showRight = '';
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <section class="dropdown" {title} on:pointerleave={() => (menuOpen = false)}>
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<div style="display:contents" on:click={() => (menuOpen = !menuOpen)}>
 		<Icon type={icon} />
 	</div>

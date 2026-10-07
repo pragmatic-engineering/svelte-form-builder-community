@@ -22,18 +22,21 @@
 <!-- https://github.com/ErnaneJ/svelte-star-rating -->
 <script lang="ts">
 	// import StarRating from '@ernane/svelte-star-rating';
-	import StarRating from '$lib/Utils/MiscComponents/StarFork/StarRating2.svelte';
+	import StarRating from '#lib/Utils/MiscComponents/StarFork/StarRating2.svelte';
 
-	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import type { Field, FormTab, ComponentOptions, ValidationResult } from '#lib/Utils/types';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 
-	import { getErrorMessage_Required } from '$lib/lib/Validation';
-	import { conditionManager } from '$lib/Utils/store';
+	import { getErrorMessage_Required } from '#lib/lib/Validation';
+	import { conditionManager } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	let config: StarsConfig = {
 		starConfig: {},
@@ -107,13 +110,14 @@
 	}
 
 	export function customClear() {
-		config.score = null;
+		config.score = 0;
 	}
 </script>
 
 <GroupSlot bind:field>
 	<ComponentLabel {field} />
 
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div on:pointerleave on:pointerenter>
 		{#if config}
 			<StarRating bind:config on:change={triggerConditionChange} />

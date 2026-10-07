@@ -10,24 +10,24 @@
 	import { fly, fade } from 'svelte/transition';
 	import { nanoid } from 'nanoid';
 
-	import Header, { type HeaderLinks } from '$lib/Views/Header.svelte';
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
-	import { mainDefinition, opts, propertyField, showPropertyPanel } from '$lib/Utils/store';
-	import type { Field, ComponentImport } from '$lib/Utils/types';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import PropertyPanelLabel from '$lib/Form/PropertyPanel/PropertyPanelLabel.svelte';
-	import PropertyPanelDataAttributes from '$lib/Form/PropertyPanel/PropertyPanelDataAttributes.svelte';
-	import PropertyPanelHtmlAttribute from '$lib/Form/PropertyPanel/PropertyPanelHtmlAttributes.svelte';
+	import Header, { type HeaderLinks } from '#lib/Views/Header.svelte';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
+	import { mainDefinition, opts, propertyField, showPropertyPanel } from '#lib/Utils/store';
+	import type { Field, ComponentImport } from '#lib/Utils/types';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import PropertyPanelLabel from '#lib/Form/PropertyPanel/PropertyPanelLabel.svelte';
+	import PropertyPanelDataAttributes from '#lib/Form/PropertyPanel/PropertyPanelDataAttributes.svelte';
+	import PropertyPanelHtmlAttribute from '#lib/Form/PropertyPanel/PropertyPanelHtmlAttributes.svelte';
 	import { onDestroy, afterUpdate } from 'svelte';
-	import DisplayContentsWrapper from '$lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
-	import StyledSidePanel from '$lib/Utils/MiscComponents/StyledSidePanel.svelte';
-	import PropertyPanelChoices from '$lib/Form/PropertyPanel/PropertyPanelChoices.svelte';
-	import PropertyPanelTooltip from '$lib/Form/PropertyPanel/PropertyPanelTooltip.svelte';
-	import ButtonSpecific from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/ButtonSpecific.svelte';
-	import PropertyPanelChoiceCheckboxRadioSpecific from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/PropertyPanelChoiceCheckboxRadioSpecific.svelte';
-	import TableSpecific from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/TableSpecific.svelte';
-	import TableColumnSpecific from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/TableColumnSpecific.svelte';
-	import PropertyPanelMatrixSpecific from '$lib/Form/PropertyPanel/PropertyPanelComponentSpecific/PropertyPanelMatrixSpecific.svelte';
+	import DisplayContentsWrapper from '#lib/Utils/MiscComponents/DisplayContentsWrapper.svelte';
+	import StyledSidePanel from '#lib/Utils/MiscComponents/StyledSidePanel.svelte';
+	import PropertyPanelChoices from '#lib/Form/PropertyPanel/PropertyPanelChoices.svelte';
+	import PropertyPanelTooltip from '#lib/Form/PropertyPanel/PropertyPanelTooltip.svelte';
+	import ButtonSpecific from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/ButtonSpecific.svelte';
+	import PropertyPanelChoiceCheckboxRadioSpecific from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/PropertyPanelChoiceCheckboxRadioSpecific.svelte';
+	import TableSpecific from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/TableSpecific.svelte';
+	import TableColumnSpecific from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/Table/TableColumnSpecific.svelte';
+	import PropertyPanelMatrixSpecific from '#lib/Form/PropertyPanel/PropertyPanelComponentSpecific/PropertyPanelMatrixSpecific.svelte';
 
 	let field: Field = $propertyField;
 	let fieldComponent: ComponentImport;
@@ -108,7 +108,11 @@
 
 {#if $showPropertyPanel}
 	<StyledSidePanel>
-		<div class="propertyPanel" in:fly|global={{ x: 200, duration: 700 }} out:fade|global={{ duration: 300 }}>
+		<div
+			class="propertyPanel"
+			in:fly|global={{ x: 200, duration: 700 }}
+			out:fade|global={{ duration: 300 }}
+		>
 			<div
 				class="propertyPanelHeader"
 				style:background={$opts.styling?.propertyPanel?.propertyPanelHeaderBackground}
@@ -117,6 +121,8 @@
 					>{@html fieldComponent.componentOptions.icon ?? ''}
 					{fieldComponent && fieldComponent.componentOptions.componentName} Properties</span
 				>
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<span on:click={() => ($showPropertyPanel = false)}>
 					<Icon type="Close" />
 				</span>
@@ -138,8 +144,12 @@
 				<!-- Html Attributes -->
 				{#if field.htmlAttributes}
 					{#each Object.entries(field.htmlAttributes) as [name, value]}
-						{#if selectedLink == 'General' && !$opts.disabledHtmlAttributes?.includes(name) && !fieldComponent.componentOptions.disabledHtmlAttributes?.includes(name)}
-							<PropertyPanelHtmlAttribute {guid} {name} bind:value={field.htmlAttributes[name]} />
+						{#if selectedLink == 'General' && !$opts.disabledHtmlAttributes?.includes(name as any) && !fieldComponent.componentOptions.disabledHtmlAttributes?.includes(name as any)}
+							<PropertyPanelHtmlAttribute
+								{guid}
+								name={String(name)}
+								bind:value={(field.htmlAttributes as Record<string, any>)[name]}
+							/>
 						{/if}
 					{/each}
 				{/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { opts } from '$lib/Utils/store';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { opts } from '#lib/Utils/store';
 
 	export let id: string;
 	export let value: any;

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import FormBuilder from '$lib/FormBuilder.svelte';
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
+	import FormBuilder from '#lib/FormBuilder.svelte';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
 
 	import type {
 		BuilderOptions,
@@ -13,8 +13,8 @@
 		Field,
 		FormDefinition,
 		FormTab
-	} from '$lib/Utils/types';
-	import { capitalizeFirstLetter } from '$lib/Utils/Utils';
+	} from '#lib/Utils/types';
+	import { capitalizeFirstLetter } from '#lib/Utils/Utils';
 
 	let formJSON2: FormDefinition[] = [
 		{
@@ -456,14 +456,8 @@
 						name: 'custom9',
 						isButton: true,
 						tab: 'Special',
-						buttonHandler: async (e, dataAttribute) => {
-							const component = new CustomConfigurator({
-								target: document.getElementById('customConfigExampleArea') as HTMLElement,
-								props: {
-									dataAttribute: dataAttribute
-								}
-							});
-							component.$set({ self: component });
+						buttonHandler: async () => {
+							console.log('Custom configuration action');
 						}
 					}
 				]
@@ -513,14 +507,8 @@
 				name: 'custom9',
 				isButton: true,
 				tab: 'Special',
-				buttonHandler: async (e, dataAttribute) => {
-					const component = new CustomConfigurator({
-						target: document.getElementById('customConfigExampleArea') as HTMLElement,
-						props: {
-							dataAttribute: dataAttribute
-						}
-					});
-					component.$set({ self: component });
+				buttonHandler: async () => {
+					console.log('Custom configuration action');
 				}
 			}
 		],
@@ -531,4 +519,4 @@
 
 <FormBuilder {options} />
 
-<div style="height:2000px" />
+<div style="height:2000px"></div>

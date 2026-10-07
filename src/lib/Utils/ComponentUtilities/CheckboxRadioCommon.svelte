@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { Field } from '$lib/Utils/types';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
+	import type { Field } from '#lib/Utils/types';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
 
 	export let field: Field;
+	void field;
 	export let label: string | undefined;
 	export let id: string;
 

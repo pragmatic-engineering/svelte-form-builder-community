@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { nanoid } from 'nanoid';
-	import CheckboxRadioCommon from '$lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
-	import { LibraryPrefix } from '$lib/Utils/Utils';
-	import { ChoiceColorStyle, ChoiceSwitchStyle, type Field } from '$lib/Utils/types';
-	import SelectSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import Checkbox from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
+	import CheckboxRadioCommon from '#lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
+	import { LibraryPrefix } from '#lib/Utils/Utils';
+	import { ChoiceColorStyle, ChoiceSwitchStyle, type Field } from '#lib/Utils/types';
+	import SelectSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import Checkbox from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Checkbox.svelte';
 
 	export let field: Field;
+	void field;
 	let styleID = `${LibraryPrefix}-${nanoid(10)}`;
 	let animationID = `${LibraryPrefix}-${nanoid(10)}`;
 	let switchStyleID = `${LibraryPrefix}-${nanoid(10)}`;
@@ -82,7 +83,7 @@
 		<SelectSlot>
 			<Label forName={switchStyleID} label="Switch Style" />
 			<select id={switchStyleID} bind:value={field.choiceConfiguration.switchStyle}>
-				<option value="" />
+				<option value=""></option>
 
 				{#each ChoiceSwitchStyle as x}
 					<option value={x}>{x}</option>
@@ -106,7 +107,7 @@
 		<Label forName={styleID} label="Fill Style" />
 
 		<select id={styleID} bind:value={field.choiceConfiguration.fillStyle}>
-			<option value="" />
+			<option value=""></option>
 
 			<option value="fill">fill</option>
 
@@ -120,7 +121,7 @@
 	<SelectSlot>
 		<Label forName={animationID} label="Animation" />
 		<select id={animationID} bind:value={field.choiceConfiguration.animation}>
-			<option value="" />
+			<option value=""></option>
 
 			<option value="smooth">smooth</option>
 			<option value="pulse">pulse</option>

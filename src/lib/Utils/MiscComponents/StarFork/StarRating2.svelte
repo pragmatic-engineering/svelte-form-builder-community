@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { StarsConfig } from '$lib/Components/Stars.svelte';
+	import type { StarsConfig } from '#lib/Components/Stars.svelte';
 	import Star from './Star.svelte';
+
 	export let config: StarsConfig = {
 		readOnly: false,
 		countStars: 5,
@@ -13,23 +14,36 @@
 			strokeColor: '#BB8511'
 		}
 	};
+
+	let score = 0;
+	$: score = Number(config.score ?? 0);
 </script>
 
 <section class="stars-container">
 	<div class="range-stars">
 		<div class="stars">
 			{#each Array(config.countStars) as star, id}
-				{#if parseInt(config.score) == id}
+				{#if Math.floor(score) == id}
 					<Star
 						{id}
-						readOnly={config.readOnly}
+						readOnly={config.readOnly ?? false}
 						starConfig={config.starConfig}
-						fillPercentage={config.score - parseInt(config.score)}
+						fillPercentage={score - Math.floor(score)}
 					/>
-				{:else if parseInt(config.score) > id}
-					<Star {id} readOnly={config.readOnly} starConfig={config.starConfig} fillPercentage={1} />
+				{:else if score > id}
+					<Star
+						{id}
+						readOnly={config.readOnly ?? false}
+						starConfig={config.starConfig}
+						fillPercentage={1}
+					/>
 				{:else}
-					<Star {id} readOnly={config.readOnly} starConfig={config.starConfig} fillPercentage={0} />
+					<Star
+						{id}
+						readOnly={config.readOnly ?? false}
+						starConfig={config.starConfig}
+						fillPercentage={0}
+					/>
 				{/if}
 			{/each}
 		</div>
@@ -47,8 +61,8 @@
 	</div>
 
 	{#if config.showScore}
-		<span class="show-score" style="font-size: {config.starConfig.size / 2}px;">
-			({parseFloat((config.score / config.countStars) * 100).toFixed(2)}%)
+		<span class="show-score" style="font-size: {(config.starConfig?.size ?? 30) / 2}px;">
+			({((score / config.countStars) * 100).toFixed(2)}%)
 		</span>
 	{/if}
 </section>

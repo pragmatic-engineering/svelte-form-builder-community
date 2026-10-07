@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { RenderAPI } from '$lib/lib/API/RenderAPI';
-	import { RenderManager } from '$lib/lib/RenderManager';
-	import { mainDefinition, opts } from '$lib/Utils/store';
-	import { validateUserInputs } from '$lib/lib/Validation';
+	import { RenderAPI } from '#lib/lib/API/RenderAPI';
+	import { RenderManager } from '#lib/lib/RenderManager';
+	import { mainDefinition, opts } from '#lib/Utils/store';
+	import { validateUserInputs } from '#lib/lib/Validation';
 
 	export let contentData: string;
 	export let customContentData: any;

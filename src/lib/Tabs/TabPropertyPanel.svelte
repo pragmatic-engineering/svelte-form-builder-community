@@ -2,16 +2,17 @@
 	import { fly, fade } from 'svelte/transition';
 	import { nanoid } from 'nanoid';
 
-	import Header, { type HeaderLinks } from '$lib/Views/Header.svelte';
-	import { opts, tabPropertiesOpen } from '$lib/Utils/store';
-	import type { FormTab } from '$lib/Utils/types';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import PropertyPanelDataAttributes from '$lib/Form/PropertyPanel/PropertyPanelDataAttributes.svelte';
-	import StyledSidePanel from '$lib/Utils/MiscComponents/StyledSidePanel.svelte';
+	import Header, { type HeaderLinks } from '#lib/Views/Header.svelte';
+	import { opts, tabPropertiesOpen } from '#lib/Utils/store';
+	import type { FormTab } from '#lib/Utils/types';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import PropertyPanelDataAttributes from '#lib/Form/PropertyPanel/PropertyPanelDataAttributes.svelte';
+	import StyledSidePanel from '#lib/Utils/MiscComponents/StyledSidePanel.svelte';
 
 	export let tab: FormTab;
+	void tab;
 	let tabNames: string[] = [];
 	let propertyTabs: HeaderLinks[] = [];
 
@@ -45,6 +46,8 @@
 			style:background={$opts.styling?.propertyPanel?.propertyPanelHeaderBackground}
 		>
 			<span>Tab Properties</span>
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<span on:click={() => ($tabPropertiesOpen = false)}>
 				<Icon type="Close" />
 			</span>

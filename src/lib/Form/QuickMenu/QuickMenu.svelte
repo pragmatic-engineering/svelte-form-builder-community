@@ -1,14 +1,17 @@
 <script lang="ts">
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
-	import type { Field, FormTab, ComponentOptions } from '$lib/Utils/types';
-	import { opts } from '$lib/Utils/store';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { QuickMenuUtils } from '$lib/Form/QuickMenu/QuickMenuUtils';
-	import { scrollTo } from '$lib/Utils/Utils';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
+	import type { Field, FormTab, ComponentOptions } from '#lib/Utils/types';
+	import { opts } from '#lib/Utils/store';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { QuickMenuUtils } from '#lib/Form/QuickMenu/QuickMenuUtils';
+	import { scrollTo } from '#lib/Utils/Utils';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 	// export let row: DefinitionRows;
 
 	let fill = '#c5c5c5';

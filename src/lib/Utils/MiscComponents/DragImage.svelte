@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { CScope } from '$lib/Utils/Utils';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { CScope } from '#lib/Utils/Utils';
 </script>
 
 <!-- Needs to be setup for browser to prerender -->

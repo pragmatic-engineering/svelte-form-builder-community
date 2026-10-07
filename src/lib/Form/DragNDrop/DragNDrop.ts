@@ -1,6 +1,6 @@
-import { DefinitionManager } from '$lib/lib/DefinitionManager';
-import { TabManager } from '$lib/Tabs/TabManager';
-import type { DefinitionRows, Field } from '$lib/Utils/types';
+import { DefinitionManager } from '#lib/lib/DefinitionManager';
+import { TabManager } from '#lib/Tabs/TabManager';
+import type { DefinitionRows, Field } from '#lib/Utils/types';
 import {
 	isDraggingStore,
 	dropTargetRowIndexStore,
@@ -8,9 +8,9 @@ import {
 	isComponentSelectionDragging,
 	opts,
 	isComponentDragging
-} from '$lib/Utils/store';
+} from '#lib/Utils/store';
 import { get } from 'svelte/store';
-import { CScope } from '$lib/Utils/Utils';
+import { CScope } from '#lib/Utils/Utils';
 
 export class DragNDrop {
 	dragSourceField: Field | null = null;

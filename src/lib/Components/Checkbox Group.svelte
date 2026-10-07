@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { convertDataAttributes } from '$lib/Utils/Utils';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
-	import { getErrorMessage_Required } from '$lib/lib/Validation';
-	import CheckboxRadioCommon from '$lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
-	import { conditionManager } from '$lib/Utils/store';
+	import { convertDataAttributes } from '#lib/Utils/Utils';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import type { Field, FormTab, ComponentOptions, ValidationResult } from '#lib/Utils/types';
+	import { getErrorMessage_Required } from '#lib/lib/Validation';
+	import CheckboxRadioCommon from '#lib/Utils/ComponentUtilities/CheckboxRadioCommon.svelte';
+	import { conditionManager } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	export function validateUserInput(): ValidationResult {
 		const values = customGetUserData();
@@ -74,7 +77,10 @@
 						isOtherChecked = true;
 
 						//Remove the "Other" value from the standard list for now
-						field.htmlAttributes.value = field.htmlAttributes.value.filter((x) => x != otherValue);
+						const currentValues = Array.isArray(field.htmlAttributes.value)
+							? field.htmlAttributes.value
+							: [];
+						field.htmlAttributes.value = currentValues.filter((x) => x != otherValue);
 					}
 				}
 			});
@@ -96,7 +102,7 @@
 
 <GroupSlot bind:field>
 	<ComponentLabel {field} />
-
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<span
 		style:display={field.choiceConfiguration?.inline ? '' : 'contents'}
 		on:pointerleave
@@ -136,7 +142,6 @@
 						{...convertDataAttributes(field.dataAttributes)}
 						type="checkbox"
 						bind:checked={isOtherChecked}
-						bind:value={otherValue}
 						on:invalid
 						on:change={componentOptions?.events?.onchange}
 						on:input={componentOptions?.events?.oninput}

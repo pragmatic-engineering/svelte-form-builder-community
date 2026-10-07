@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { nanoid } from 'nanoid';
-	import Label from '$lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
-	import TextSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
-	import { TooltipPosition, TooltipSize, type Field } from '$lib/Utils/types';
-	import { LibraryPrefix } from '$lib/Utils/Utils';
+	import Label from '#lib/Form/PropertyPanel/PropertyPanelUtilities/Label.svelte';
+	import TextSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/TextSlot.svelte';
+	import { TooltipPosition, TooltipSize, type Field } from '#lib/Utils/types';
+	import { LibraryPrefix } from '#lib/Utils/Utils';
 	import { onDestroy, onMount } from 'svelte';
-	import SelectSlot from '$lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
+	import SelectSlot from '#lib/Form/PropertyPanel/PropertyPanelUtilities/SelectSlot.svelte';
 
 	export let field: Field;
+	void field;
 	let tooltipTextID = `${LibraryPrefix}-tooltip-${nanoid(10)}`;
 	let tooltipPositionID = `${LibraryPrefix}-tooltip-${nanoid(10)}`;
 	let tooltipSizeID = `${LibraryPrefix}-tooltip-${nanoid(10)}`;
@@ -31,10 +32,9 @@
 		<Label forName={tooltipTextID} label="Help & Informational Text" />
 		<div
 			contenteditable="true"
-			type="text"
 			id={tooltipTextID}
 			bind:textContent={field.tooltipAttributes.text}
-		/>
+		></div>
 	</TextSlot>
 
 	<SelectSlot>

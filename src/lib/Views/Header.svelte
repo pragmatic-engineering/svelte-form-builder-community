@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { opts } from '$lib/Utils/store';
+	import { opts } from '#lib/Utils/store';
 
 	export let links: HeaderLinks[];
 	export let selectedValue: string;
@@ -30,6 +30,8 @@
 	</div>
 
 	{#each links as item}
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			on:click={() => (selectedValue = item.value)}
 			on:click={item.onClick}
@@ -40,7 +42,7 @@
 			{item.text}
 		</div>
 	{/each}
-	<div style="flex-grow:1" />
+	<div style="flex-grow:1"></div>
 </div>
 
 <style>

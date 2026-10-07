@@ -1,16 +1,19 @@
 <script lang="ts">
-	import type { Field, FormTab, ComponentOptions, ValidationResult } from '$lib/Utils/types';
-	import { getErrorMessage_Required } from '$lib/lib/Validation';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import type { Field, FormTab, ComponentOptions, ValidationResult } from '#lib/Utils/types';
+	import { getErrorMessage_Required } from '#lib/lib/Validation';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
 
-	import { convertDataAttributes } from '$lib/Utils/Utils';
-	import SelectOptions from '$lib/Utils/ComponentUtilities/SelectOptions.svelte';
-	import { conditionManager } from '$lib/Utils/store';
+	import { convertDataAttributes } from '#lib/Utils/Utils';
+	import SelectOptions from '#lib/Utils/ComponentUtilities/SelectOptions.svelte';
+	import { conditionManager } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
 
 	//Setup with any desired default attributes
 	const defaultAttributes: Partial<Field> = {};

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { view } from '$lib/Utils/store';
-	import BuildTools from '$lib/Tools/BuildTools.svelte';
-	import RenderTools from '$lib/Tools/RenderTools.svelte';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { view } from '#lib/Utils/store';
+	import BuildTools from '#lib/Tools/BuildTools.svelte';
+	import RenderTools from '#lib/Tools/RenderTools.svelte';
 
 	let contentData: string = '';
-	let playAnimation: boolean;
+	let playAnimation = false;
 	let copyBlink = false;
 	let customContentData: any = '';
 

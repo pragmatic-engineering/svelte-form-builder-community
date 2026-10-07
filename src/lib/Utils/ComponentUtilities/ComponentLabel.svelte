@@ -1,9 +1,10 @@
 <script lang="ts">
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { opts } from '$lib/Utils/store';
-	import type { Field } from '$lib/Utils/types';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { opts } from '#lib/Utils/store';
+	import type { Field } from '#lib/Utils/types';
 
 	export let field: Field;
+	void field;
 </script>
 
 {#if field.labelAttributes}

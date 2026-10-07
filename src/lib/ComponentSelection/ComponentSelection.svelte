@@ -1,30 +1,30 @@
 <script lang="ts">
-	import { DefinitionManager } from '$lib/lib/DefinitionManager';
+	import { DefinitionManager } from '#lib/lib/DefinitionManager';
 	import {
 		componentSelectionStyle,
 		componentSelectionPoppedOut,
 		opts,
 		setComponentSelectionCategory
-	} from '$lib/Utils/store';
+	} from '#lib/Utils/store';
 	import {
 		FormComponents,
 		ProComponents,
 		type ComponentOptions,
 		type Field,
 		type FormComponentsType
-	} from '$lib/Utils/types';
+	} from '#lib/Utils/types';
 	import { afterUpdate, onMount } from 'svelte';
-	import { DragNDrop } from '$lib/Form/DragNDrop/DragNDrop';
-	import { TabManager } from '$lib/Tabs/TabManager';
-	import { dragElement } from '$lib/ComponentSelection/DragNDropComponentSelection';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import { QuickMenuUtils } from '$lib/Form/QuickMenu/QuickMenuUtils';
+	import { DragNDrop } from '#lib/Form/DragNDrop/DragNDrop';
+	import { TabManager } from '#lib/Tabs/TabManager';
+	import { dragElement } from '#lib/ComponentSelection/DragNDropComponentSelection';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import { QuickMenuUtils } from '#lib/Form/QuickMenu/QuickMenuUtils';
 
-	import { GetComponentSelectionMetaData } from '$lib/lib/DefaultAttributeMap';
+	import { GetComponentSelectionMetaData } from '#lib/lib/DefaultAttributeMap';
 	import { blur, fade, fly, scale, slide } from 'svelte/transition';
-	import DropdownMenu from '$lib/Utils/MiscComponents/DropdownMenu.svelte';
-	import { flavor } from '$lib/Utils/Misc/flavor';
-	import { scrollTo } from '$lib/Utils/Utils';
+	import DropdownMenu from '#lib/Utils/MiscComponents/DropdownMenu.svelte';
+	import { flavor } from '#lib/Utils/Misc/flavor';
+	import { scrollTo } from '#lib/Utils/Utils';
 
 	let main: HTMLDivElement = {} as HTMLDivElement;
 	let dragHandle: HTMLDivElement = {} as HTMLDivElement;
@@ -225,7 +225,7 @@
 		});
 	}
 
-	let toggleKeywordSearch: boolean;
+	let toggleKeywordSearch = true;
 	let keywordSearchTerm: string;
 	function onKeywordSearch() {
 		if (!keywordSearchTerm) {
@@ -455,10 +455,12 @@
 		{/if}
 
 		<div>
-			<div class="component-spacer" />
+			<div class="component-spacer"></div>
 
 			{#each filteredComponents as item}
 				{#if item}
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
 						in:slide|global={{ duration: 400 }}
 						out:slide={{ duration: 400 }}
@@ -483,7 +485,7 @@
 							{item.componentName}
 						{/if}
 					</div>
-					<div class="component-spacer" />
+					<div class="component-spacer"></div>
 				{/if}
 			{/each}
 		</div>

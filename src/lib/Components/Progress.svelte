@@ -1,21 +1,33 @@
 <script lang="ts">
-	import type { Field, FormTab, ComponentOptions } from '$lib/Utils/types';
-	import ComponentLabel from '$lib/Utils/ComponentUtilities/ComponentLabel.svelte';
-	import GroupSlot from '$lib/Utils/ComponentUtilities/GroupSlot.svelte';
+	import type { Field, FormTab, ComponentOptions } from '#lib/Utils/types';
+	import ComponentLabel from '#lib/Utils/ComponentUtilities/ComponentLabel.svelte';
+	import GroupSlot from '#lib/Utils/ComponentUtilities/GroupSlot.svelte';
 
-	import { convertDataAttributes } from '$lib/Utils/Utils';
-	import { conditionManager } from '$lib/Utils/store';
+	import { convertDataAttributes } from '#lib/Utils/Utils';
+	import { conditionManager } from '#lib/Utils/store';
 
 	export let field: Field;
 	export let componentOptions: ComponentOptions;
 	export let tab: FormTab;
+	void field;
+	void componentOptions;
+	void tab;
+
+	$: progressValue = Number(field?.htmlAttributes?.value);
+	$: progressMax = Number(field?.htmlAttributes?.max);
+	$: progressAttributes = (() => {
+		const { value: _value, max: _max, ...attrs } = { ...(field?.htmlAttributes ?? {}) };
+		return attrs;
+	})();
 </script>
 
 <GroupSlot bind:field>
 	<ComponentLabel {field} />
 
 	<progress
-		{...field.htmlAttributes}
+		{...progressAttributes}
+		value={Number.isFinite(progressValue) ? progressValue : undefined}
+		max={Number.isFinite(progressMax) ? progressMax : undefined}
 		{...convertDataAttributes(field.dataAttributes)}
 		on:pointerleave
 		on:pointerenter
@@ -27,5 +39,5 @@
 		on:focus={componentOptions?.events?.onfocus}
 		on:keyup={componentOptions?.events?.onkeyup}
 		on:keydown={componentOptions?.events?.onkeydown}
-	/>
+	></progress>
 </GroupSlot>

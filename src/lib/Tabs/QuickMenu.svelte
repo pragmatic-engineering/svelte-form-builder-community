@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { TabManager } from '$lib/Tabs/TabManager';
-	import type { FormTab } from '$lib/Utils/types';
-	import { opts, tabPropertiesOpen } from '$lib/Utils/store';
-	import TabProperties from '$lib/Tabs/TabPropertyPanel.svelte';
-	import Icon from '$lib/Utils/MiscComponents/Icon.svelte';
-	import DropdownMenu from '$lib/Utils/MiscComponents/DropdownMenu.svelte';
+	import { TabManager } from '#lib/Tabs/TabManager';
+	import type { FormTab } from '#lib/Utils/types';
+	import { opts, tabPropertiesOpen } from '#lib/Utils/store';
+	import TabProperties from '#lib/Tabs/TabPropertyPanel.svelte';
+	import Icon from '#lib/Utils/MiscComponents/Icon.svelte';
+	import DropdownMenu from '#lib/Utils/MiscComponents/DropdownMenu.svelte';
 	export let tab: FormTab;
+	void tab;
 </script>
 
 <DropdownMenu>
